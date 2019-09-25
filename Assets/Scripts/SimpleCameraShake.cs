@@ -22,11 +22,19 @@ public class SimpleCameraShake : MonoBehaviour
         }
     }
 
-    public static SimpleCameraShake instance;
+    private static SimpleCameraShake _instance;
 
     //Cinemachine shake
     private CinemachineVirtualCamera virtualCamera;
     private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
+
+    public static SimpleCameraShake Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
 
     private void Awake()
     {
@@ -35,9 +43,9 @@ public class SimpleCameraShake : MonoBehaviour
             virtualCamera = GetComponent<CinemachineVirtualCamera>();
         }
 
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this;
+            _instance = this;
         }
     }
 

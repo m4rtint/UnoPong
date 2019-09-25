@@ -43,3 +43,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 449960003
+    locked: 0
+  - name: Wall
+    uniqueID: 539438711
+    locked: 0
+  - name: Brick
+    uniqueID: 3513241847
+    locked: 0
+  - name: Player
+    uniqueID: 940694295
+    locked: 0
+  - name: Ball
+    uniqueID: 342062299
+    locked: 0
+  - name: ParticleEffects
+    uniqueID: 1191558971
+    locked: 0
+  - name: Menu
+    uniqueID: 3960579819
+    locked: 0
