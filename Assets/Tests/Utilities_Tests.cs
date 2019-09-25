@@ -8,7 +8,7 @@ namespace Tests
     public class Utilities_Tests
     {
         [Test]
-        public void IndexToVector2_index_at_0()
+        public void IndexToVector2_Index_At_0_Equal_Vector()
         {
             //Arrange
             int index = 0;
@@ -23,7 +23,7 @@ namespace Tests
         }
 
 		[Test]
-		public void IndexToVector2_index_at_1()
+		public void IndexToVector2_Index_At_1_Equal_Vector()
 		{
 			//Arrange
 			int index = 1;
@@ -38,7 +38,7 @@ namespace Tests
 		}
 
 		[Test]
-		public void IndexToVector2_index_at_30()
+		public void IndexToVector2_Index_At_30_Equal_Vector()
 		{
 			//Arrange
 			int index = 30;
@@ -53,7 +53,7 @@ namespace Tests
 		}
 
 		[Test]
-		public void IndexToVector2_index_at_negative_one()
+		public void IndexToVector2_Index_At_Negative_One_Equal_Vector()
 		{
 			//Arrange
 			int index = 30;
@@ -68,7 +68,7 @@ namespace Tests
 		}
 
 		[Test]
-		public void IndexToVector2_index_at_negative_onethousand()
+		public void IndexToVector2_Index_At_Negative_Onethousand_Equal_Vector()
 		{
 			//Arrange
 			int index = -1000;
@@ -83,7 +83,7 @@ namespace Tests
 		}
 
 		[Test]
-	    public void IndexToVector2_index_at_over_amount()
+	    public void IndexToVector2_Index_At_Over_Amount_Equal_Vector()
 		{
 			//Arrange
 			int index = 1000;
@@ -97,6 +97,63 @@ namespace Tests
 	        Assert.AreEqual(expectedVector2, actualVector2);
 		}
 
+        [Test]
+        public void RandomPlayer_Run_100_Times_With_4_Players_Expected_Min_Max()
+		{
+			//Arrange
+			int times = 100;
+            int players = 4;
+            int min = int.MaxValue;
+            int max = 0;
 
-	}
+            MPHT.Player expectedMax = MPHT.Player.PLAYER_FOUR;
+            MPHT.Player expectedMin = MPHT.Player.PLAYER_ONE;
+
+            //Act
+            for (int i = 0; i < times; i++)
+			{
+				int player = (int)MPHT.Utilities.RandomPlayer(players);
+                min = Mathf.Min(min, player);
+                max = Mathf.Max(max, player);
+               
+			}
+
+            //Assert
+            Assert.AreEqual((MPHT.Player)min, expectedMin);
+            Assert.AreEqual((MPHT.Player)max, expectedMax);
+        }
+
+        [Test]
+        public void RandomPlayer_Run_100_Times_With_3_Players_Expected_Min_Max()
+        {
+            //Arrange
+            int times = 100;
+            int players = 3;
+            int min = int.MaxValue;
+            int max = 0;
+
+            MPHT.Player expectedMax = MPHT.Player.PLAYER_THREE;
+            MPHT.Player expectedMin = MPHT.Player.PLAYER_ONE;
+
+            //Act
+            for (int i = 0; i < times; i++)
+            {
+                int player = (int)MPHT.Utilities.RandomPlayer(players);
+                min = Mathf.Min(min, player);
+                max = Mathf.Max(max, player);
+
+            }
+
+            //Assert
+            Assert.AreEqual((MPHT.Player)min, expectedMin);
+            Assert.AreEqual((MPHT.Player)max, expectedMax);
+        }
+
+        [Test]
+        public void RandomPlayer_With_10_Players_Throw_Exception()
+        {
+            //Assert
+            Assert.Catch(() => { MPHT.Utilities.RandomPlayer(10); });
+        }
+    }
 }

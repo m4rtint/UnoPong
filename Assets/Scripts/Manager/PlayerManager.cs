@@ -2,10 +2,10 @@
     using System;
     using UnityEngine;
     using UnityEngine.Assertions;
+    using MPHT;
 
     public class PlayerManager : MonoBehaviour
     {
-        private const int _availablePlayers = 4;
         private PlayerPlatform[] _arrayOfPlayerPlatforms;
 
         /// <summary>
@@ -25,7 +25,7 @@
         private void SetupPlayerPlatform()
         {
             _arrayOfPlayerPlatforms = GetComponentsInChildren<PlayerPlatform>();
-            Assert.AreEqual<int>(_arrayOfPlayerPlatforms.Length, _availablePlayers, $"Amount of platforms in child MUST equal {_availablePlayers}");
+            Assert.AreEqual<int>(_arrayOfPlayerPlatforms.Length, MPHT.Utilities.AvailablePlayers, $"Amount of platforms in child MUST equal {MPHT.Utilities.AvailablePlayers}");
         }
     }
 
