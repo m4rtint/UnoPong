@@ -7,6 +7,7 @@
     public class PlayerManager : MonoBehaviour
     {
         private PlayerPlatform[] _arrayOfPlayerPlatforms;
+        private readonly PlayerManagerBehaivour _behavior = new PlayerManagerBehaivour();
 
         /// <summary>
         /// Activate the specific player
@@ -20,12 +21,23 @@
         private void Awake()
         {
             SetupPlayerPlatform();
+            _behavior.CheckPlayerAvailabilityCount(_arrayOfPlayerPlatforms);
         }
 
         private void SetupPlayerPlatform()
         {
             _arrayOfPlayerPlatforms = GetComponentsInChildren<PlayerPlatform>();
-            Assert.AreEqual<int>(_arrayOfPlayerPlatforms.Length, MPHT.Utilities.AvailablePlayers, $"Amount of platforms in child MUST equal {MPHT.Utilities.AvailablePlayers}");
+        }
+    }
+
+    public class PlayerManagerBehaivour {
+
+        public void CheckPlayerAvailabilityCount(PlayerPlatform[] platforms)
+        {
+            if (platforms.Length != MPHT.Utilities.AvailablePlayers)
+            {
+                throw new Exception($"Amount of platforms in child MUST equal {MPHT.Utilities.AvailablePlayers}");
+            }
         }
     }
 
