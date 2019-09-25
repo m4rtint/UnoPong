@@ -1,66 +1,68 @@
 ﻿using UnityEngine;
 
-public class BoardManager : MonoBehaviour
-{
-    [SerializeField]
-    private GameObject _brick;
-
-    private const int m_widthAndHeightOfGrid = 13;
-    private const int m_AmountOfBricks = m_widthAndHeightOfGrid * m_widthAndHeightOfGrid;
-
-    GameObject[] boardOfBricks = new GameObject[m_AmountOfBricks];
-
-    public void Initialize(bool[] boardTemplate, int players, PlayerMaterials playerMaterials)
+namespace MPHT {
+    public class BoardManager : MonoBehaviour
     {
-        CheckTemplate(boardTemplate);
-        for (int i = 0; i < m_AmountOfBricks; i++)
+        [SerializeField]
+        private GameObject _brick;
+
+        private const int _widthAndHeightOfGrid = 13;
+        private const int _AmountOfBricks = _widthAndHeightOfGrid * _widthAndHeightOfGrid;
+
+        GameObject[] _boardOfBricks = new GameObject[_AmountOfBricks];
+
+        public void Initialize(bool[] boardTemplate, int players, PlayerMaterials playerMaterials)
         {
-            GameObject obj = (GameObject)Instantiate(_brick);
-            obj.transform.parent = transform;
-            boardOfBricks[i] = obj;
+            CheckTemplate(boardTemplate);
+            InstantiateBoard();
+            SetupBoard(players, playerMaterials, boardTemplate);
         }
 
-        int index = 0;
-        for (double y = 3; y >= -3; y -= 0.5)
+        private void InstantiateBoard()
         {
-            for (double x = -3; x <= 3; x += 0.5)
+            for (int i = 0; i < _AmountOfBricks; i++)
             {
-                if (boardTemplate[index])
-                {
-                    boardOfBricks[index].transform.position = new Vector3((float)x, (float)y);
-                    boardOfBricks[index].GetComponent<SpriteRenderer>().material = GetRandomMaterial(players, playerMaterials);
-                }
-                boardOfBricks[index].SetActive(boardTemplate[index]);
-                
-                index++;
+                GameObject obj = (GameObject)Instantiate(_brick);
+                obj.transform.parent = transform;
+                _boardOfBricks[i] = obj;
             }
         }
-    }
 
-    private Material GetRandomMaterial(int players, PlayerMaterials mat)
-    {
-        int index = Random.Range(0, players);
-        switch (index)
+        private void SetupBoard(int players, PlayerMaterials playerMaterials, bool[] boardTemplate)
         {
-            case 0:
-                return mat.PlayerOneMaterial;
-            case 1:
-                return mat.PlayerTwoMaterial;
-            case 2:
-                return mat.PlayerThreeMaterial;
-            case 3:
-                return mat.PlayerFourMaterial;
-            default:
-                return mat.PlayerOneMaterial;
+            for (int i = 0; i < _AmountOfBricks; i++)
+            {
+                _boardOfBricks[i].transform.position = MPHT.Utilities.IndexToVector(i, _widthAndHeightOfGrid);
+                _boardOfBricks[i].GetComponent<SpriteRenderer>().material = GetRandomMaterial(players, playerMaterials);
+                _boardOfBricks[i].SetActive(boardTemplate[i]);
+            }
         }
-    }
 
-    private void CheckTemplate(bool[] boardTemplate)
-    {
-        if (boardTemplate.Length != boardOfBricks.Length)
+        private Material GetRandomMaterial(int players, PlayerMaterials mat)
         {
-            throw new System.Exception($"Board template amount not exact: board has {boardOfBricks.Length} bricks, template has {boardTemplate.Length} bricks");
+            int index = Random.Range(0, players);
+            switch (index)
+            {
+                case 0:
+                    return mat.PlayerOneMaterial;
+                case 1:
+                    return mat.PlayerTwoMaterial;
+                case 2:
+                    return mat.PlayerThreeMaterial;
+                case 3:
+                    return mat.PlayerFourMaterial;
+                default:
+                    return mat.PlayerOneMaterial;
+            }
         }
+
+        private void CheckTemplate(bool[] boardTemplate)
+        {
+            if (boardTemplate.Length != _boardOfBricks.Length)
+            {
+                throw new System.Exception($"Board template amount not exact: board has {_boardOfBricks.Length} bricks, template has {boardTemplate.Length} bricks");
+            }
+        }
+
     }
-    
 }

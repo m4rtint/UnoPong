@@ -12,7 +12,7 @@ public class OnCollision : MonoBehaviour
         if (collision.gameObject.tag == MPHT.Tags.Ball)
         {
             MPHT.FXObjectPooler.Instance.SpawnFromPool(_effect, transform.position, Quaternion.identity);
-            SimpleCameraShake.Instance.PlayShake();
+            MPHT.SimpleCameraShake.Instance.PlayShake();
             gameObject.SetActive(false);
         }
     }

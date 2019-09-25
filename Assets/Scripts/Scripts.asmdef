@@ -1,0 +1,16 @@
+{
+    "name": "Scripts",
+    "references": [
+        "Cinemachine",
+        "Unity.TextMeshPro",
+        "LeanTween"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
