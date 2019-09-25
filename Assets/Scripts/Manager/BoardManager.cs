@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace MPHT {
     public class BoardManager : MonoBehaviour
@@ -13,7 +14,8 @@ namespace MPHT {
 
         public void Initialize(bool[] boardTemplate, int players, PlayerMaterials playerMaterials)
         {
-            CheckTemplate(boardTemplate);
+            BoardManagerBehaivours boardBehaivour = new BoardManagerBehaivours();
+            boardBehaivour.CheckTemplate(boardTemplate, _boardOfBricks);
             InstantiateBoard();
             SetupBoard(players, playerMaterials, boardTemplate);
         }
@@ -55,14 +57,16 @@ namespace MPHT {
                     return mat.PlayerOneMaterial;
             }
         }
+    }
 
-        private void CheckTemplate(bool[] boardTemplate)
+    public class BoardManagerBehaivours
+    {
+        public void CheckTemplate(bool[] boardTemplate, GameObject[] board)
         {
-            if (boardTemplate.Length != _boardOfBricks.Length)
+            if (boardTemplate.Length != board.Length)
             {
-                throw new System.Exception($"Board template amount not exact: board has {_boardOfBricks.Length} bricks, template has {boardTemplate.Length} bricks");
+                throw new System.Exception($"Board template amount not exact: board has {board.Length} bricks, template has {boardTemplate.Length} bricks");
             }
         }
-
     }
 }
