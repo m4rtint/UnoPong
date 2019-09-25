@@ -2,7 +2,6 @@
     using System;
     using UnityEngine;
     using UnityEngine.Assertions;
-    using MPHT;
 
     public class PlayerManager : MonoBehaviour
     {
@@ -13,9 +12,9 @@
         /// Activate the specific player
         /// </summary>
         /// <param name="player"></param>
-        public void AddPlayer(Player player)
+        public void AddPlayer(Player player, Direction direction)
         {
-
+            _arrayOfPlayerPlatforms[(int)player].transform.position = _behavior.PlatformInitialPosition(direction);
         }
 
         private void Awake()
@@ -31,6 +30,7 @@
     }
 
     public class PlayerManagerBehaivour {
+        bool[] _directionsTaken = new bool[Enum.GetValues(typeof(Direction)).Length];
 
         public void CheckPlayerAvailabilityCount(PlayerPlatform[] platforms)
         {
@@ -38,6 +38,16 @@
             {
                 throw new Exception($"Amount of platforms in child MUST equal {MPHT.Utilities.AvailablePlayers}");
             }
+        }
+
+        /// <summary>
+        /// Return the initial position of platforms depending on direction
+        /// </summary>
+        /// <param name="dir">Direction of where to start</param>
+        /// <returns>position of where the platform starts</returns>
+        public Vector3 PlatformInitialPosition(Direction dir)
+        {
+            return Vector3.zero;
         }
     }
 
