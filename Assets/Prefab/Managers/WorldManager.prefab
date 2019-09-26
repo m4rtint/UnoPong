@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6701952573490890188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6701952573490890186}
+  - component: {fileID: 6701952573490890189}
+  - component: {fileID: 6701952573490890187}
+  m_Layer: 0
+  m_Name: WorldManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6701952573490890186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6701952573490890188}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6701952573490890189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6701952573490890188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99f241dbb1fb10f4897640be2a0c071f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _boardManager: {fileID: 0}
+  _playerManager: {fileID: 0}
+--- !u!114 &6701952573490890187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6701952573490890188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e83a2063f36e6e547855b4a418179ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerOneMaterial: {fileID: 2100000, guid: d8795ea1c0a52432e964765e0c2bb628, type: 2}
+  _playerTwoMaterial: {fileID: 2100000, guid: d19944213e70c4fc5b6c433dc63b0c0f, type: 2}
+  _playerThreeMaterial: {fileID: 2100000, guid: 6dcd905c5771aca4abb898ef03ffa3c8,
+    type: 2}
+  _playerFourMaterial: {fileID: 2100000, guid: 02099fbda3ac827428294b8b56fb78ed, type: 2}
+  _defaultMaterial: {fileID: 2100000, guid: 0cfed7a0d27834361902f519aa5e43ae, type: 2}

@@ -3,6 +3,9 @@
     using UnityEngine;
     using UnityEngine.Assertions;
 
+    /// <summary>
+    /// Manages all players - platforms
+    /// </summary>
     public class PlayerManager : MonoBehaviour
     {
         private IPlatform[] _arrayOfPlayerPlatforms;
@@ -31,12 +34,13 @@
         }
     }
 
+    /// <summary>
+    /// Logic for Player Manager
+    /// </summary>
     public class PlayerManagerBehaviour {
 
         private readonly IMaterials _playerMaterials;
-
-        bool[] _directionsTaken = new bool[Enum.GetValues(typeof(Direction)).Length];
-
+        
         /// <summary>
         /// Constructor for play manager behaviour
         /// </summary>
@@ -66,17 +70,18 @@
         /// <param name="player">Player Number</param>
         public void PlatformInitialize(IPlatform platform, Direction dir, Player player)
         {
-            // TODO - Set the position/orientation;
             Vector3 position = GetPositionFromDirection(dir);
             Quaternion rotation = GetRotationFromDirection(dir);
-            // TODO - Set the material;
             Material playerColor = _playerMaterials.GetPlayerMaterialFor(player);
 
             platform.Initialize(position, rotation, dir, player, playerColor);
-
-            // TODO - Set the Controls
         }
 
+        /// <summary>
+        /// Gets the Quaternion rotation value from the direction chosen
+        /// </summary>
+        /// <param name="dir">direction chosen to spawn at</param>
+        /// <returns>Quaternion angle to spawn</returns>
         public Quaternion GetRotationFromDirection(Direction dir)
         {
             Quaternion rotation = Quaternion.identity;
@@ -87,6 +92,11 @@
             return rotation;
         }
 
+        /// <summary>
+        /// Gets the position vector from the direction chosen
+        /// </summary>
+        /// <param name="dir">direction chosen to spawn at</param>
+        /// <returns>Position to spawn at</returns>
         public Vector3 GetPositionFromDirection(Direction dir)
         {
             Vector3 position = Vector3.zero;

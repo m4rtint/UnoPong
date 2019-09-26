@@ -23,35 +23,11 @@ public class PlatformControls : MonoBehaviour
     }
     
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (isAddForce)
-        {
-            AddForceUpdate();
-        }
-        else
-        {
-            TranslatePlatform();
-        }
+        TranslatePlatform();
     }
-
-    private void AddForceUpdate()
-    {
-        if (MPHT.InputManager.OnHorizontalPressed() > 0)
-        {
-            RigidBody.velocity = Vector2.zero;
-            RigidBody.AddForce(Vector2.right * force);
-        }
-        else if (MPHT.InputManager.OnHorizontalPressed() < 0)
-        {
-            RigidBody.velocity = Vector2.zero;
-            RigidBody.AddForce(Vector2.left * force);
-        }
-        else
-        {
-            RigidBody.velocity = Vector2.zero;
-        }
-    }
+    
 
     private void TranslatePlatform()
     {
