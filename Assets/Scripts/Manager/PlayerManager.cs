@@ -6,9 +6,9 @@
 namespace MPHT
 {
     using System;
+    using MPHT;
     using UnityEngine;
     using UnityEngine.Assertions;
-    using MPHT;
 
     /// <summary>
     /// Manages all players - platforms
@@ -21,13 +21,19 @@ namespace MPHT
         /// <summary>
         /// Activate the specific player
         /// </summary>
-        /// <param name="player"></param>
+        /// <param name="player">player number</param>
+        /// <param name="direction">Direction of where the platform is placed</param>
+        /// <param name="placement">Controller scheme</param>
         public void AddPlayer(Player player, Direction direction, InputPlacement placement)
         {
             IPlatform playerPlat = _arrayOfPlayerPlatforms[(int)player];
             _behaviour.PlatformInitialize(playerPlat, direction, player, placement);
         }
 
+        /// <summary>
+        /// Initializes the Player Manager
+        /// </summary>
+        /// <param name="playerMaterials">player materials loader</param>
         public void Initialize(PlayerMaterials playerMaterials)
         {
             _behaviour = new PlayerManagerBehaviour(playerMaterials);

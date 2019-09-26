@@ -1,7 +1,15 @@
-﻿using System.Collections;
+﻿//-----------------------------------------------------------------------
+// <copyright file="BricksAnimation.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Animation for the rotation of the whole center bricks
+/// </summary>
 public class BricksAnimation : MonoBehaviour
 {
     private void Update()
@@ -13,7 +21,7 @@ public class BricksAnimation : MonoBehaviour
             float z = transform.eulerAngles.z + 90;
             Debug.Log(transform.rotation.z);
             transform.LeanRotateZ(z, 2f)
-                .setOnComplete(() => { Time.timeScale = scale;})
+                .setOnComplete(() => { Time.timeScale = scale; })
                 .setIgnoreTimeScale(true);
         }
     }

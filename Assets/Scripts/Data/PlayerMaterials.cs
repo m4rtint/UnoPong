@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿//-----------------------------------------------------------------------
+// <copyright file="PlayerMaterials.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using MPHT;
+using UnityEngine;
 
-public interface IMaterials
-{
-    Material GetPlayerMaterialFor(Player player);
-}
-
+/// <summary>
+/// Storage for Players Material - changes its color depending on the material
+/// </summary>
 public class PlayerMaterials : MonoBehaviour, IMaterials
 {
     [SerializeField]
@@ -20,7 +23,12 @@ public class PlayerMaterials : MonoBehaviour, IMaterials
     private Material _playerFourMaterial;
     [SerializeField]
     private Material _defaultMaterial;
-    
+
+    /// <summary>
+    /// Gets the material dedicated for specific player
+    /// </summary>
+    /// <param name="player">Player Number</param>
+    /// <returns>Material for player</returns>
     public Material GetPlayerMaterialFor(Player player)
     {
         switch (player)
@@ -37,5 +45,4 @@ public class PlayerMaterials : MonoBehaviour, IMaterials
                 return _defaultMaterial;
         }
     }
-
 }

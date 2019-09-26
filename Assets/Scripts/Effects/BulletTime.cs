@@ -1,32 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BulletTime : MonoBehaviour
+﻿//-----------------------------------------------------------------------
+// <copyright file="BulletTime.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+namespace MPHT
 {
-    public float scale = 100f;
-    public float bulletTimeScale = 0.1f;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-    private void Start()
+    /// <summary>
+    /// Slows down time depending on collision triggers
+    /// </summary>
+    public class BulletTime : MonoBehaviour
     {
-        Time.timeScale = scale;
-    }
+        private float scale = 100f;
+        private float bulletTimeScale = 0.1f;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            Time.timeScale = bulletTimeScale;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
+        private void Start()
         {
             Time.timeScale = scale;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "Player")
+            {
+                Time.timeScale = bulletTimeScale;
+                Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.tag == "Player")
+            {
+                Time.timeScale = scale;
+                Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            }
         }
     }
 }

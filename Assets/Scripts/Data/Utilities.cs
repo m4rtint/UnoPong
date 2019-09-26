@@ -24,7 +24,7 @@ namespace MPHT
         /// <param name="widthAndHeight">width or height of board</param>
         /// <returns>position of index</returns>
         public static Vector3 IndexToVector(int i, int widthAndHeight)
-        {
+       { 
             Vector3 position = Vector3.zero;
 
             if (i < 0)
