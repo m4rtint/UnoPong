@@ -248,10 +248,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: 0
-    prefab: {fileID: 7512936171675806348, guid: cdb1b18901bbced47974c1750a7dbb1c,
+  - _tag: 0
+    _prefab: {fileID: 7512936171675806348, guid: cdb1b18901bbced47974c1750a7dbb1c,
       type: 3}
-    size: 5
+    _size: 10
 --- !u!4 &128339187
 Transform:
   m_ObjectHideFlags: 0

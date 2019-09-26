@@ -7,10 +7,15 @@ using MPHT;
 [RequireComponent(typeof(PlayerMaterials))]
 public class WorldManager : MonoBehaviour
 {
-    public static event Action OnFixedUpdate;
-    
     // Placeholder
     private static int _numberOfPlayers = 2;
+
+
+    [Header("Managers")]
+    [SerializeField]
+    private BoardManager _boardManager;
+    [SerializeField]
+    private PlayerManager _playerManager;
 
     private PlayerMaterials _playerMaterial;
     private PlayerMaterials PlayerMaterial
@@ -26,16 +31,12 @@ public class WorldManager : MonoBehaviour
         }
     }
 
-    [Header("Managers")]
-    [SerializeField]
-    private BoardManager _boardManager;
-    [SerializeField]
-    private PlayerManager _playerManager;
-    
+    public static event Action OnFixedUpdate;
+
+
     private void Start()
     {
-
-        _boardManager.Initialize(BoardTemplates.board_Three, _numberOfPlayers, _playerMaterial);
+        _boardManager.Initialize(BoardTemplates.BoardThree, _numberOfPlayers, _playerMaterial);
     }
 
     private void FixedUpdate()

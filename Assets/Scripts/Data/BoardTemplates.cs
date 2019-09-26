@@ -1,6 +1,19 @@
-﻿public static class BoardTemplates 
+﻿//-----------------------------------------------------------------------
+// <copyright file="BoardTemplates.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+
+/// <summary>
+/// Templates for how the bricks are displayed
+/// </summary>
+public static class BoardTemplates 
 {
-    public static bool[] board_One = new bool[] {
+    /// <summary>
+    /// Board Template One
+    /// </summary>
+    public static readonly bool[] BoardOne = new bool[] 
+    {
         true, true, true, true, true, true, true, true, true, true, true, true, true,
         true, true, true, true, true, true, true, true, true, true, true, true, true,
         true, true, true, true, true, true, true, true, true, true, true, true, true,
@@ -16,7 +29,11 @@
         true, true, true, true, true, true, true, true, true, true, true, true, true,
     };
 
-    public static bool[] board_Two = new bool[] {
+    /// <summary>
+    /// Board Template Two
+    /// </summary>
+    public static readonly bool[] BoardTwo = new bool[] 
+    {
         false, false, false, true, true, true, true, true, true, true, false, false, false,
         false, false, true, true, true, true, true, true, true, true, true, false, false,
         false, true, true, true, true, true, true, true, true, true, true, true, false,
@@ -32,7 +49,11 @@
         false, false, false, true, true, true, true, true, true, true, false, false, false,
     };
 
-    public static bool[] board_Three = new bool[] {
+    /// <summary>
+    /// Board Template Three
+    /// </summary>
+    public static readonly bool[] BoardThree = new bool[] 
+    {
         true, true, false, false, false, false, false, false, false, false, false, true, true,
         true, true, true, false, false, false, false, false, false, false, true, true, true,
         false, true, true, false, false, false, false, false, false, true, true, true, false,

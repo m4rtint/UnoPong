@@ -1,81 +1,124 @@
-﻿namespace MPHT
+﻿//-----------------------------------------------------------------------
+// <copyright file="FXObjectPooler.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+namespace MPHT
 {
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
 
+    /// <summary>
+    /// Particle Effect Enum
+    /// </summary>
+    public enum Effect
+    {
+        /// <summary>
+        /// Blue Brick Break Particle Effect
+        /// </summary>
+        Blue_Brick_Break
+    }
+
+    /// <summary>
+    /// Object Pooler only for particle effects
+    /// </summary>
     public class FXObjectPooler : MonoBehaviour
     {
+        private static FXObjectPooler _instance;
         [SerializeField]
         private List<Pool> pools;
-        private Dictionary<Effect, Queue<GameObject>> poolDictionary;
+        private Dictionary<Effect, Queue<GameObject>> _poolDictionary;
 
+        /// <summary>
+        /// Instance to be called as singleton
+        /// </summary>
+        public static FXObjectPooler Instance => _instance;
 
-        [System.Serializable]
-        public class Pool
-        {
-            public Effect tag;
-            public GameObject prefab;
-            public int size;
-        }
-
-        #region Singleton
-        public static FXObjectPooler Instance;
-
-        private void Awake()
-        {
-            Instance = this;
-        }
-        #endregion Singleton
-
-        // Use this for initialization
-        void Start()
-        {
-            poolDictionary = new Dictionary<Effect, Queue<GameObject>>();
-
-            foreach (Pool pool in pools)
-            {
-                Queue<GameObject> objectPool = new Queue<GameObject>();
-
-                for (int i = 0; i < pool.size; i++)
-                {
-                    if (pool.prefab.GetComponent<ParticleSystem>() == null)
-                    {
-                        throw new System.Exception("SHOULD HAVE A PARTICLE SYSTEM");
-                    }
-
-                    GameObject obj = Instantiate(pool.prefab);
-                    obj.SetActive(false);
-                    objectPool.Enqueue(obj);
-                    obj.transform.parent = transform;
-                }
-
-                poolDictionary.Add(pool.tag, objectPool);
-            }
-        }
-
+        /// <summary>
+        /// Spawn Particle effect from pooler
+        /// </summary>
+        /// <param name="tag">Which effect to spawn</param>
+        /// <param name="position">where to spawn</param>
+        /// <param name="rotation">rotation of spawn</param>
+        /// <returns>Particle Effect Game Object</returns>
         public GameObject SpawnFromPool(Effect tag, Vector3 position, Quaternion rotation)
         {
-            if (!poolDictionary.ContainsKey(tag))
+            if (!this._poolDictionary.ContainsKey(tag))
             {
                 Debug.LogWarning(tag + " does not exist");
                 return null;
             }
 
-            GameObject newObj = poolDictionary[tag].Dequeue();
+            GameObject newObj = this._poolDictionary[tag].Dequeue();
             newObj.SetActive(true);
             newObj.transform.position = position;
             newObj.transform.rotation = rotation;
             newObj.GetComponent<ParticleSystem>().Play();
 
-            poolDictionary[tag].Enqueue(newObj);
+           this._poolDictionary[tag].Enqueue(newObj);
 
             return newObj;
         }
+
+        private void Awake()
+        {
+            _instance = this;
+        }
+
+        // Use this for initialization
+        private void Start()
+        {
+            this._poolDictionary = new Dictionary<Effect, Queue<GameObject>>();
+
+            foreach (Pool pool in this.pools)
+            {
+                Queue<GameObject> objectPool = new Queue<GameObject>();
+
+                for (int i = 0; i < pool.Size; i++)
+                {
+                    if (pool.Prefab.GetComponent<ParticleSystem>() == null)
+                    {
+                        throw new System.Exception("SHOULD HAVE A PARTICLE SYSTEM");
+                    }
+
+                    GameObject obj = Instantiate(pool.Prefab);
+                    obj.SetActive(false);
+                    objectPool.Enqueue(obj);
+                    obj.transform.parent = this.transform;
+                }
+
+                this._poolDictionary.Add(pool.Tag, objectPool);
+            }
+        }
     }
 
-    public enum Effect
+    /// <summary>
+    /// Struct of pool for inspector to add elements to
+    /// </summary>
+    [System.Serializable]
+    public class Pool
     {
-        Blue_Brick_Break
+        [SerializeField]
+        private Effect _tag;
+        [SerializeField]
+        private GameObject _prefab;
+        [SerializeField]
+        private int _size;
+
+        /// <summary>
+        /// Effect enum
+        /// </summary>
+        public Effect Tag => this._tag;
+
+        /// <summary>
+        /// Prefab of particle effect
+        /// </summary>
+        public GameObject Prefab => this._prefab;
+
+        /// <summary>
+        /// How many to instantiate
+        /// </summary>
+        public int Size => this._size;
     }
 }
