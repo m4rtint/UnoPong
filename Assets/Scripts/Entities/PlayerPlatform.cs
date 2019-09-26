@@ -1,40 +1,91 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using MPHT;
-
-public interface IPlatform
+﻿//-----------------------------------------------------------------------
+// <copyright file="PlayerPlatform.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+namespace MPHT
 {
-    void Initialize(Vector3 position, Quaternion rotation, Direction direction, Player player, Material mat, InputPlacement placement);
-    Direction Direction { get; }
-    Player Player { get; }
-}
+    using System.Collections;
+    using System.Collections.Generic;
+    using MPHT;
+    using UnityEngine;
 
-[RequireComponent(typeof(PlatformControls))]
-[RequireComponent(typeof(SpriteRenderer))]
-public class PlayerPlatform : MonoBehaviour, IPlatform
-{
-    private Direction _direction;
-    private Player _player;
-    private SpriteRenderer _spriteRenderer;
-    private InputPlacement _inputPlacement;
-
-    public Direction Direction => _direction;
-    public Player Player => _player;
-    public InputPlacement Input => _inputPlacement;
-
-    private void Awake()
+    /// <summary>
+    /// Player platform properties
+    /// </summary>
+    [RequireComponent(typeof(PlatformControls))]
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class PlayerPlatform : MonoBehaviour, IPlatform
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        private Direction _direction;
+        private Player _player;
+        private SpriteRenderer _spriteRenderer;
+        private InputPlacement _inputPlacement;
+
+        /// <summary>
+        /// Direction of where player currently is
+        /// </summary>
+        public Direction Direction => _direction;
+
+        /// <summary>
+        /// Player Number
+        /// </summary>
+        public Player Player => _player;
+
+        /// <summary>
+        /// Where on keyboard is the input 
+        /// </summary>
+        public InputPlacement Input => _inputPlacement;
+
+        /// <summary>
+        /// Initialized the platform
+        /// </summary>
+        /// <param name="position">position of where the platform will be</param>
+        /// <param name="rotation">rotation of platform</param>
+        /// <param name="direction">which side will platform be at</param>
+        /// <param name="player">which player number</param>
+        /// <param name="mat">material of player</param>
+        /// <param name="placement">which keys allow input</param>
+        public void Initialize(Vector3 position, Quaternion rotation, Direction direction, Player player, Material mat, InputPlacement placement)
+        {
+            _direction = direction;
+            _player = player;
+            _spriteRenderer.material = mat;
+            _inputPlacement = placement;
+            transform.position = position;
+            transform.rotation = rotation;
+        }
+
+        private void Awake()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
     }
-
-    public void Initialize(Vector3 position, Quaternion rotation, Direction direction, Player player, Material mat, InputPlacement placement)
+    
+    /// <summary>
+    /// For testing purposes interface for platform player
+    /// </summary>
+    public interface IPlatform
     {
-        _direction = direction;
-        _player = player;
-        _spriteRenderer.material = mat;
-        _inputPlacement = placement;
-        transform.position = position;
-        transform.rotation = rotation;
+        /// <summary>
+        /// Gets the direction
+        /// </summary>
+        Direction Direction { get; }
+
+        /// <summary>
+        /// Gets the player
+        /// </summary>
+        Player Player { get; }
+
+        /// <summary>
+        /// Initialized the platform
+        /// </summary>
+        /// <param name="position">position of where the platform will be</param>
+        /// <param name="rotation">rotation of platform</param>
+        /// <param name="direction">which side will platform be at</param>
+        /// <param name="player">which player number</param>
+        /// <param name="mat">material of player</param>
+        /// <param name="placement">which keys allow input</param>
+        void Initialize(Vector3 position, Quaternion rotation, Direction direction, Player player, Material mat, InputPlacement placement);
     }
 }

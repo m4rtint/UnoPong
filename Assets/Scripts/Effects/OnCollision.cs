@@ -1,19 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class OnCollision : MonoBehaviour
+﻿//-----------------------------------------------------------------------
+// <copyright file="OnCollision.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+namespace MPHT
 {
-    [SerializeField]
-    private MPHT.Effect _effect;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /// <summary>
+    /// On Object Collides
+    /// </summary>
+    public class OnCollision : MonoBehaviour
     {
-        if (collision.gameObject.tag == MPHT.Tags.Ball)
+        [SerializeField]
+        private MPHT.Effect _effect;
+
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            MPHT.FXObjectPooler.Instance.SpawnFromPool(_effect, transform.position, Quaternion.identity);
-            MPHT.SimpleCameraShake.Instance.PlayShake();
-            gameObject.SetActive(false);
+            if (collision.gameObject.tag == MPHT.Tags.Ball)
+            {
+                MPHT.FXObjectPooler.Instance.SpawnFromPool(_effect, transform.position, Quaternion.identity);
+                MPHT.SimpleCameraShake.Instance.PlayShake();
+                gameObject.SetActive(false);
+            }
         }
     }
 }

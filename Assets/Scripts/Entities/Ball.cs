@@ -1,20 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Ball : MonoBehaviour
+﻿//-----------------------------------------------------------------------
+// <copyright file="Ball.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+namespace MPHT
 {
-    public float force = 10f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        var x = Random.Range(0, 1.0f);
-        var y = Random.Range(0, 1.0f);
-        PushBall(new Vector2(x,y));
-    }
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-    void PushBall(Vector2 direction)
+    /// <summary>
+    /// Ball Properties
+    /// </summary>
+    public class Ball : MonoBehaviour
     {
-        GetComponent<Rigidbody2D>().AddForce(direction * force);
+        [SerializeField]
+        private float _force = 10f;
+
+        // Start is called before the first frame update
+        private void Start()
+        {
+            var x = Random.Range(0, 1.0f);
+            var y = Random.Range(0, 1.0f);
+            PushBall(new Vector2(x, y));
+        }
+
+        private void PushBall(Vector2 direction)
+        {
+            GetComponent<Rigidbody2D>().AddForce(direction * _force);
+        }
     }
 }
