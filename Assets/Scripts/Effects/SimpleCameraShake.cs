@@ -1,13 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Cinemachine;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="SimpleCameraShake.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
 namespace MPHT
 {
+    using System.Collections;
+    using System.Collections.Generic;
+    using Cinemachine;
+    using UnityEngine;
+
+    /// <summary>
+    /// Camera Shaker script
+    /// </summary>
     [RequireComponent(typeof(CinemachineVirtualCamera))]
     public class SimpleCameraShake : MonoBehaviour
     {
+        private static SimpleCameraShake _instance;
         [SerializeField]
         private float shakeDuration = 0.3f;
         [SerializeField]
@@ -16,20 +25,13 @@ namespace MPHT
         private float shakeFrequency = 0f;
 
         private float shakeElapsedTime = 0f;
-        private bool IsShaking
-        {
-            get
-            {
-                return shakeElapsedTime > 0;
-            }
-        }
 
-        private static SimpleCameraShake _instance;
+        private CinemachineVirtualCamera _virtualCamera;
+        private CinemachineBasicMultiChannelPerlin _virtualCameraNoise;
 
-        //Cinemachine shake
-        private CinemachineVirtualCamera virtualCamera;
-        private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
-
+        /// <summary>
+        /// Gets global instance to access like singleton
+        /// </summary>
         public static SimpleCameraShake Instance
         {
             get
@@ -38,11 +40,49 @@ namespace MPHT
             }
         }
 
+        private bool IsShaking
+        {
+            get
+            {
+                return shakeElapsedTime > 0;
+            }
+        }
+
+        /// <summary>
+        /// Shake camera for duration
+        /// </summary>
+        public void PlayShake()
+        {
+            shakeElapsedTime = shakeDuration;
+        }
+
+        private void Update()
+        {
+            if (_virtualCamera != null || _virtualCameraNoise != null)
+            {
+                if (IsShaking)
+                {
+                    shakeElapsedTime -= Time.deltaTime;
+
+                    if (shakeElapsedTime > 0)
+                    {
+                        _virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
+                        _virtualCameraNoise.m_FrequencyGain = shakeFrequency;
+                    }
+                    else
+                    {
+                        _virtualCameraNoise.m_AmplitudeGain = 0;
+                        shakeElapsedTime = 0;
+                    }
+                }
+            }
+        }
+
         private void Awake()
         {
-            if (virtualCamera == null)
+            if (_virtualCamera == null)
             {
-                virtualCamera = GetComponent<CinemachineVirtualCamera>();
+                _virtualCamera = GetComponent<CinemachineVirtualCamera>();
             }
 
             if (_instance == null)
@@ -53,36 +93,9 @@ namespace MPHT
 
         private void Start()
         {
-            if (virtualCamera != null)
+            if (_virtualCamera != null)
             {
-                virtualCameraNoise = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
-            }
-        }
-
-        public void PlayShake()
-        {
-            shakeElapsedTime = shakeDuration;
-        }
-
-        private void Update()
-        {
-            if (virtualCamera != null || virtualCameraNoise != null)
-            {
-                if (IsShaking)
-                {
-                    shakeElapsedTime -= Time.deltaTime;
-
-                    if (shakeElapsedTime > 0)
-                    {
-                        virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
-                        virtualCameraNoise.m_FrequencyGain = shakeFrequency;
-                    }
-                    else
-                    {
-                        virtualCameraNoise.m_AmplitudeGain = 0;
-                        shakeElapsedTime = 0;
-                    }
-                }
+                _virtualCameraNoise = _virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
             }
         }
     }
