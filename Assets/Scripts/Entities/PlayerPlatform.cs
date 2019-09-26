@@ -7,4 +7,9 @@ public class PlayerPlatform : MonoBehaviour
 {
     private Direction _direction;
     private Player _player;
+
+    public void Initialize()
+    {
+
+    }
 }

@@ -14,7 +14,10 @@
         /// <param name="player"></param>
         public void AddPlayer(Player player, Direction direction)
         {
-            _arrayOfPlayerPlatforms[(int)player].transform.position = _behavior.PlatformInitialPosition(direction);
+            PlayerPlatform playerPlat = _arrayOfPlayerPlatforms[(int)player];
+            playerPlat.transform.position = _behavior.PlatformInitialPosition(direction);
+
+
         }
 
         private void Awake()
