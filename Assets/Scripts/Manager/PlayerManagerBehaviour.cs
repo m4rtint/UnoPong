@@ -14,16 +14,15 @@ namespace MPHT
     /// </summary>
     public class PlayerManagerBehaviour
     {
-
         private readonly IMaterials _playerMaterials;
 
         /// <summary>
-        /// Constructor for play manager behaviour
+        /// Initializes a new instance of the <see cref="PlayerManagerBehaviour" /> class
         /// </summary>
         /// <param name="playerMaterials">Player Materials loader</param>
         public PlayerManagerBehaviour(IMaterials playerMaterials)
         {
-            _playerMaterials = playerMaterials;
+            this._playerMaterials = playerMaterials;
         }
 
         /// <summary>
@@ -44,11 +43,12 @@ namespace MPHT
         /// <param name="platform">Platform object</param>
         /// <param name="dir">Direction of where platform should start at</param>
         /// <param name="player">Player Number</param>
+        /// <param name="placement">Keyboard control scheme</param>
         public void PlatformInitialize(IPlatform platform, Direction dir, Player player, InputPlacement placement)
         {
-            Vector3 position = GetPositionFromDirection(dir);
-            Quaternion rotation = GetRotationFromDirection(dir);
-            Material playerColor = _playerMaterials.GetPlayerMaterialFor(player);
+            Vector3 position = this.GetPositionFromDirection(dir);
+            Quaternion rotation = this.GetRotationFromDirection(dir);
+            Material playerColor = this._playerMaterials.GetPlayerMaterialFor(player);
 
             platform.Initialize(position, rotation, dir, player, playerColor, placement);
         }

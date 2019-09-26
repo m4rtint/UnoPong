@@ -1,17 +1,32 @@
-﻿using UnityEngine;
-using UnityEngine.Assertions;
+﻿//-----------------------------------------------------------------------
+// <copyright file="BoardManager.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+namespace MPHT
+{
+    using UnityEngine;
+    using UnityEngine.Assertions;
 
-namespace MPHT {
+    /// <summary>
+    /// Manages the boards data
+    /// </summary>
     public class BoardManager : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject _brick;
-
         private const int _WidthAndHeightOfGrid = 13;
         private const int _AmountOfBricks = _WidthAndHeightOfGrid * _WidthAndHeightOfGrid;
 
-        GameObject[] _boardOfBricks = new GameObject[_AmountOfBricks];
+        [SerializeField]
+        private GameObject _brick;
 
+        private GameObject[] _boardOfBricks = new GameObject[_AmountOfBricks];
+
+        /// <summary>
+        /// Initializes the board according to template and players
+        /// </summary>
+        /// <param name="boardTemplate">template for the board</param>
+        /// <param name="players">amount of players in game</param>
+        /// <param name="playerMaterials">materials for player</param>
         public void Initialize(bool[] boardTemplate, int players, PlayerMaterials playerMaterials)
         {
             BoardManagerBehaivours boardBehaivour = new BoardManagerBehaivours();
@@ -46,8 +61,16 @@ namespace MPHT {
         }
     }
 
+    /// <summary>
+    /// Board Manager logic
+    /// </summary>
     public class BoardManagerBehaivours
     {
+        /// <summary>
+        /// Checks if the template board brick amount matches the amount of bricks on the scene
+        /// </summary>
+        /// <param name="boardTemplate">template for board</param>
+        /// <param name="board">board on the scene</param>
         public void CheckTemplate(bool[] boardTemplate, GameObject[] board)
         {
             if (boardTemplate.Length != board.Length)
