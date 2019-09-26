@@ -44,7 +44,7 @@ namespace MPHT
         /// <param name="dir">Direction of where platform should start at</param>
         /// <param name="player">Player Number</param>
         /// <param name="placement">Keyboard control scheme</param>
-        public void PlatformInitialize(IPlatform platform, Direction dir, Player player, InputPlacement placement)
+        public void PlatformInitialize(IPlatform platform, Direction dir, Player player, ControlScheme placement)
         {
             Vector3 position = this.GetPositionFromDirection(dir);
             Quaternion rotation = this.GetRotationFromDirection(dir);

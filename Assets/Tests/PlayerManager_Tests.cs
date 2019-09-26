@@ -17,7 +17,7 @@ namespace Tests
         {
             mat = Substitute.For<IMaterials>();
         }
-        
+
         [TearDown]
         public void Teardown()
         {
@@ -31,7 +31,7 @@ namespace Tests
             PlayerManagerBehaviour behaviour = new PlayerManagerBehaviour(mat);
 
             //Assert
-            Assert.DoesNotThrow(() => { behaviour.CheckPlayerAvailabilityCount(new IPlatform[4]) ;});
+            Assert.DoesNotThrow(() => { behaviour.CheckPlayerAvailabilityCount(new IPlatform[4]); });
         }
 
         [Test]
@@ -111,7 +111,7 @@ namespace Tests
             IPlatform playerPlat = Substitute.For<IPlatform>();
             Direction dir = Direction.UP;
             Player player = Player.PLAYER_ONE;
-            InputPlacement placement = InputPlacement.KEYS;
+            ControlScheme placement = ControlScheme.KEYS;
 
             //Act
             behaviour.PlatformInitialize(playerPlat, dir, player, placement);

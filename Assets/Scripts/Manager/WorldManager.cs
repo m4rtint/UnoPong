@@ -24,8 +24,10 @@ namespace MPHT
         private BoardManager _boardManager;
         [SerializeField]
         private PlayerManager _playerManager;
+        [SerializeField]
+        private MainMenuManager _mainMenuManager;
         private PlayerMaterials _playerMaterial;
-
+        
         /// <summary>
         /// Called on every fixed update. All classes should be based on this
         /// </summary>
@@ -44,17 +46,29 @@ namespace MPHT
             }
         }
 
-        private void Start()
+        private void Awake()
         {
-            _boardManager.Initialize(BoardTemplates.BoardThree, _numberOfPlayers, PlayerMaterial);
+            _mainMenuManager.OnPlayerSelected += PlayerSelected;
+        }
+
+        private void OnStartGame()
+        {
+            //// _boardManager.Initialize(BoardTemplates.BoardThree, _numberOfPlayers, PlayerMaterial);
+        }
+
+        private void OnDestroy()
+        {
+            _mainMenuManager.OnPlayerSelected -= PlayerSelected;
         }
 
         private void FixedUpdate()
         {
-            if (OnFixedUpdate != null)
-            {
-                OnFixedUpdate();
-            }
+            OnFixedUpdate?.Invoke();
+        }
+
+        private void PlayerSelected(Player player, Direction direction, ControlScheme scheme)
+        {
+            _playerManager.AddPlayer(player, direction, scheme);
         }
     }
 }

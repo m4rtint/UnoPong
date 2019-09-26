@@ -20,7 +20,7 @@ namespace MPHT
         private Direction _direction;
         private Player _player;
         private SpriteRenderer _spriteRenderer;
-        private InputPlacement _inputPlacement;
+        private ControlScheme _inputPlacement;
 
         /// <summary>
         /// Direction of where player currently is
@@ -35,7 +35,7 @@ namespace MPHT
         /// <summary>
         /// Where on keyboard is the input 
         /// </summary>
-        public InputPlacement Input => _inputPlacement;
+        public ControlScheme Input => _inputPlacement;
 
         /// <summary>
         /// Initialized the platform
@@ -46,7 +46,7 @@ namespace MPHT
         /// <param name="player">which player number</param>
         /// <param name="mat">material of player</param>
         /// <param name="placement">which keys allow input</param>
-        public void Initialize(Vector3 position, Quaternion rotation, Direction direction, Player player, Material mat, InputPlacement placement)
+        public void Initialize(Vector3 position, Quaternion rotation, Direction direction, Player player, Material mat, ControlScheme placement)
         {
             _direction = direction;
             _player = player;

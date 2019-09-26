@@ -24,7 +24,7 @@ namespace MPHT
         /// <param name="player">player number</param>
         /// <param name="direction">Direction of where the platform is placed</param>
         /// <param name="placement">Controller scheme</param>
-        public void AddPlayer(Player player, Direction direction, InputPlacement placement)
+        public void AddPlayer(Player player, Direction direction, ControlScheme placement)
         {
             IPlatform playerPlat = _arrayOfPlayerPlatforms[(int)player];
             _behaviour.PlatformInitialize(playerPlat, direction, player, placement);

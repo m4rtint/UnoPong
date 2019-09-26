@@ -34,6 +34,6 @@ namespace MPHT
         /// <param name="player">which player number</param>
         /// <param name="mat">material of player</param>
         /// <param name="placement">which keys allow input</param>
-        void Initialize(Vector3 position, Quaternion rotation, Direction direction, Player player, Material mat, InputPlacement placement);
+        void Initialize(Vector3 position, Quaternion rotation, Direction direction, Player player, Material mat, ControlScheme placement);
     }
 }

@@ -9,6 +9,7 @@
           <Value>Editor</Value>
           <Value>ProCore</Value>
           <Value>Tests</Value>
+          <Value>TextMesh Pro</Value>
         </CollectionProperty>
       </ParserSettings>
     </Parser>
