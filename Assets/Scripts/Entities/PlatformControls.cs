@@ -4,26 +4,44 @@ using UnityEngine;
 
 public class PlatformControls : MonoBehaviour
 {
-    [SerializeField]
-    private bool isAddForce = false;
-    [SerializeField]
-    private float force = 3000f;
-    private Rigidbody2D rigidBody;
+    private Rigidbody2D _rigidBody;
     private Rigidbody2D RigidBody
     {
         get
         {
-            if (rigidBody == null)
+            if (_rigidBody == null)
             {
-                rigidBody = GetComponent<Rigidbody2D>();
+                _rigidBody = GetComponent<Rigidbody2D>();
             }
 
-            return rigidBody;
+            return _rigidBody;
         }
     }
-    
-    // Update is called once per frame
-    private void FixedUpdate()
+    private PlayerPlatform _playerPlat;
+    private PlayerPlatform PlayerPlat
+    {
+        get
+        {
+            if (_playerPlat == null)
+            {
+                _playerPlat = GetComponent<PlayerPlatform>();
+            }
+
+            return _playerPlat;
+        }
+    }
+
+    private void Awake()
+    {
+        WorldManager.OnFixedUpdate += PlatformControlOnUpdate;
+    }
+
+    private void OnDestroy()
+    {
+        WorldManager.OnFixedUpdate -= PlatformControlOnUpdate;
+    }
+
+    private void PlatformControlOnUpdate()
     {
         TranslatePlatform();
     }
@@ -31,11 +49,11 @@ public class PlatformControls : MonoBehaviour
 
     private void TranslatePlatform()
     {
-        if (MPHT.InputManager.OnHorizontalPressed() > 0)
+        if (MPHT.InputManager.OnHorizontalPressed(PlayerPlat.Input) > 0)
         {
             transform.position += new Vector3(0.3f, 0);
         }
-        else if (MPHT.InputManager.OnHorizontalPressed() < 0)
+        else if (MPHT.InputManager.OnHorizontalPressed(PlayerPlat.Input) < 0)
         {
             transform.position -= new Vector3(0.3f, 0);
         }

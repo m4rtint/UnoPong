@@ -111,12 +111,13 @@ namespace Tests
             IPlatform playerPlat = Substitute.For<IPlatform>();
             Direction dir = Direction.UP;
             Player player = Player.PLAYER_ONE;
+            InputPlacement placement = InputPlacement.KEYS;
 
             //Act
-            behaviour.PlatformInitialize(playerPlat, dir, player);
+            behaviour.PlatformInitialize(playerPlat, dir, player, placement);
 
             //Assert
-            playerPlat.ReceivedWithAnyArgs().Initialize(default, default, default, default, default);
+            playerPlat.ReceivedWithAnyArgs().Initialize(default, default, default, default, default, default);
         }
 
         [Test]

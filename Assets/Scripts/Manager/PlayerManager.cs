@@ -15,10 +15,10 @@
         /// Activate the specific player
         /// </summary>
         /// <param name="player"></param>
-        public void AddPlayer(Player player, Direction direction)
+        public void AddPlayer(Player player, Direction direction, InputPlacement placement)
         {
             IPlatform playerPlat = _arrayOfPlayerPlatforms[(int)player];
-            _behaviour.PlatformInitialize(playerPlat, direction, player);
+            _behaviour.PlatformInitialize(playerPlat, direction, player, placement);
         }
 
         public void Initialize(PlayerMaterials playerMaterials)
@@ -68,13 +68,13 @@
         /// <param name="platform">Platform object</param>
         /// <param name="dir">Direction of where platform should start at</param>
         /// <param name="player">Player Number</param>
-        public void PlatformInitialize(IPlatform platform, Direction dir, Player player)
+        public void PlatformInitialize(IPlatform platform, Direction dir, Player player, InputPlacement placement)
         {
             Vector3 position = GetPositionFromDirection(dir);
             Quaternion rotation = GetRotationFromDirection(dir);
             Material playerColor = _playerMaterials.GetPlayerMaterialFor(player);
 
-            platform.Initialize(position, rotation, dir, player, playerColor);
+            platform.Initialize(position, rotation, dir, player, playerColor, placement);
         }
 
         /// <summary>
