@@ -1,32 +1,77 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="InputManager.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
 namespace MPHT
 {
-    public class InputManager : MonoBehaviour
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+
+    /// <summary>
+    /// Which Control scheme user is using
+    /// </summary>
+    public enum InputPlacement
     {
-        internal const string _WASD = "WASD";
-        internal const string _YGHJ = "YGHJ";
-        internal const string _PL = "PL";
-        internal const string _KEY = "KEYS";
+        /// <summary>
+        /// WASD Contols
+        /// </summary>
+        WASD,
 
-        internal const string _Horizontal = "_Horizontal";
-        internal const string _Vertical = "_Vertical";
+        /// <summary>
+        /// YGHJ Contols
+        /// </summary>
+        YGHJ,
 
+        /// <summary>
+        /// PL:" Controls
+        /// </summary>
+        PL,
+
+        /// <summary>
+        /// Arrow key controls
+        /// </summary>
+        KEYS
+    }
+
+    /// <summary>
+    /// Manages all input
+    /// </summary>
+    public class InputManager
+    {
+        private const string _WASD = "WASD";
+        private const string _YGHJ = "YGHJ";
+        private const string _PL = "PL";
+        private const string _KEY = "KEYS";
+
+        private const string _Horizontal = "_Horizontal";
+        private const string _Vertical = "_Vertical";
+
+        /// <summary>
+        /// Check if the horizontal keys are pressed
+        /// </summary>
+        /// <param name="placement">control scheme</param>
+        /// <returns>axis value</returns>
         public static float OnHorizontalPressed(InputPlacement placement)
         {
             return OnKeysPressed(placement, true);
         }
 
+        /// <summary>
+        /// Check if the vertical keys are pressed
+        /// </summary>
+        /// <param name="placement">control scheme</param>
+        /// <returns>axis value</returns>
         public static float OnVerticalPressed(InputPlacement placement)
         {
             return OnKeysPressed(placement, false);
         }
 
+        //// TODO - Testing
         private static float OnKeysPressed(InputPlacement placement, bool isHorizontal)
         {
-            string axisName = "";
+            string axisName = string.Empty;
             switch (placement)
             {
                 case InputPlacement.WASD:
@@ -42,16 +87,9 @@ namespace MPHT
                     axisName = _KEY;
                     break;
             }
+
             string axis = isHorizontal ? _Horizontal : _Vertical;
             return (axisName.Length == 0) ? 0 : Input.GetAxis(axisName + axis);
         }
-    }
-
-    public enum InputPlacement
-    {
-        WASD,
-        YGHJ,
-        PL,
-        KEYS
     }
 }

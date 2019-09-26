@@ -1,62 +1,74 @@
-﻿using MPHT;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿//-----------------------------------------------------------------------
+// <copyright file="PlatformControls.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+namespace MPHT
+{ 
+    using System.Collections;
+    using System.Collections.Generic;
+    using MPHT;
+    using UnityEngine;
 
-public class PlatformControls : MonoBehaviour
-{
-    private Rigidbody2D _rigidBody;
-    private Rigidbody2D RigidBody
+    /// <summary>
+    /// Handles movement for platform
+    /// </summary>
+    public class PlatformControls : MonoBehaviour
     {
-        get
+        private Rigidbody2D _rigidBody;
+        private PlayerPlatform _playerPlat;
+
+        private PlayerPlatform PlayerPlat
         {
-            if (_rigidBody == null)
+            get
             {
-                _rigidBody = GetComponent<Rigidbody2D>();
-            }
+                if (_playerPlat == null)
+                {
+                    _playerPlat = GetComponent<PlayerPlatform>();
+                }
 
-            return _rigidBody;
+                return _playerPlat;
+            }
         }
-    }
-    private PlayerPlatform _playerPlat;
-    private PlayerPlatform PlayerPlat
-    {
-        get
+
+        private Rigidbody2D RigidBody
         {
-            if (_playerPlat == null)
+            get
             {
-                _playerPlat = GetComponent<PlayerPlatform>();
+                if (_rigidBody == null)
+                {
+                    _rigidBody = GetComponent<Rigidbody2D>();
+                }
+
+                return _rigidBody;
             }
-
-            return _playerPlat;
         }
-    }
 
-    private void Awake()
-    {
-        WorldManager.OnFixedUpdate += PlatformControlOnUpdate;
-    }
-
-    private void OnDestroy()
-    {
-        WorldManager.OnFixedUpdate -= PlatformControlOnUpdate;
-    }
-
-    private void PlatformControlOnUpdate()
-    {
-        TranslatePlatform();
-    }
-    
-
-    private void TranslatePlatform()
-    {
-        if (MPHT.InputManager.OnHorizontalPressed(PlayerPlat.Input) > 0)
+        private void Awake()
         {
-            transform.position += new Vector3(0.3f, 0);
+            WorldManager.OnFixedUpdate += PlatformControlOnUpdate;
         }
-        else if (MPHT.InputManager.OnHorizontalPressed(PlayerPlat.Input) < 0)
+
+        private void OnDestroy()
         {
-            transform.position -= new Vector3(0.3f, 0);
+            WorldManager.OnFixedUpdate -= PlatformControlOnUpdate;
+        }
+
+        private void PlatformControlOnUpdate()
+        {
+            TranslatePlatform();
+        }
+
+        private void TranslatePlatform()
+        {
+            if (MPHT.InputManager.OnHorizontalPressed(PlayerPlat.Input) > 0)
+            {
+                transform.position += new Vector3(0.3f, 0);
+            }
+            else if (MPHT.InputManager.OnHorizontalPressed(PlayerPlat.Input) < 0)
+            {
+                transform.position -= new Vector3(0.3f, 0);
+            }
         }
     }
 }
