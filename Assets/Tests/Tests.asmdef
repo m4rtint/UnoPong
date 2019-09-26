@@ -27,7 +27,9 @@
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
-    "precompiledReferences": [],
+    "precompiledReferences": [
+        "NSubstitute.dll"
+    ],
     "autoReferenced": true,
     "defineConstraints": []
 }

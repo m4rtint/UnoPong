@@ -7,8 +7,8 @@ namespace MPHT {
         [SerializeField]
         private GameObject _brick;
 
-        private const int _widthAndHeightOfGrid = 13;
-        private const int _AmountOfBricks = _widthAndHeightOfGrid * _widthAndHeightOfGrid;
+        private const int _WidthAndHeightOfGrid = 13;
+        private const int _AmountOfBricks = _WidthAndHeightOfGrid * _WidthAndHeightOfGrid;
 
         GameObject[] _boardOfBricks = new GameObject[_AmountOfBricks];
 
@@ -34,7 +34,7 @@ namespace MPHT {
         {
             for (int i = 0; i < _AmountOfBricks; i++)
             {
-                _boardOfBricks[i].transform.position = MPHT.Utilities.IndexToVector(i, _widthAndHeightOfGrid);
+                _boardOfBricks[i].transform.position = MPHT.Utilities.IndexToVector(i, _WidthAndHeightOfGrid);
                 _boardOfBricks[i].GetComponent<SpriteRenderer>().material = GetRandomMaterial(players, playerMaterials);
                 _boardOfBricks[i].SetActive(boardTemplate[i]);
             }
@@ -42,20 +42,7 @@ namespace MPHT {
 
         private Material GetRandomMaterial(int players, PlayerMaterials mat)
         {
-            int index = Random.Range(0, players);
-            switch (index)
-            {
-                case 0:
-                    return mat.PlayerOneMaterial;
-                case 1:
-                    return mat.PlayerTwoMaterial;
-                case 2:
-                    return mat.PlayerThreeMaterial;
-                case 3:
-                    return mat.PlayerFourMaterial;
-                default:
-                    return mat.PlayerOneMaterial;
-            }
+            return mat.GetPlayerMaterialFor(MPHT.Utilities.RandomPlayer(players));
         }
     }
 

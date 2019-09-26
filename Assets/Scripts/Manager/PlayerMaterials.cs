@@ -1,8 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MPHT;
 
-public class PlayerMaterials : MonoBehaviour
+public interface IMaterials
+{
+    Material GetPlayerMaterialFor(Player player);
+}
+
+public class PlayerMaterials : MonoBehaviour, IMaterials
 {
     [SerializeField]
     private Material _playerOneMaterial;
@@ -12,36 +18,23 @@ public class PlayerMaterials : MonoBehaviour
     private Material _playerThreeMaterial;
     [SerializeField]
     private Material _playerFourMaterial;
-
-    public Material PlayerOneMaterial
+    [SerializeField]
+    private Material _defaultMaterial;
+    
+    public Material GetPlayerMaterialFor(Player player)
     {
-        get
+        switch (player)
         {
-            return _playerOneMaterial;
-        }
-    }
-
-    public Material PlayerTwoMaterial
-    {
-        get
-        {
-            return _playerTwoMaterial;
-        }
-    }
-
-    public Material PlayerThreeMaterial
-    {
-        get
-        {
-            return _playerThreeMaterial;
-        }
-    }
-
-    public Material PlayerFourMaterial
-    {
-        get
-        {
-            return _playerFourMaterial;
+            case Player.PLAYER_ONE:
+                return _playerOneMaterial;
+            case Player.PLAYER_TWO:
+                return _playerTwoMaterial;
+            case Player.PLAYER_THREE:
+                return _playerThreeMaterial;
+            case Player.PLAYER_FOUR:
+                return _playerFourMaterial;
+            default:
+                return _defaultMaterial;
         }
     }
 

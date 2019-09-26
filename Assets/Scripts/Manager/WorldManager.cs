@@ -22,6 +22,6 @@ public class WorldManager : MonoBehaviour
     private void Start()
     {
 
-        _boardManager.Initialize(BoardTemplates.board_Two, 4, _playerMaterial);
+        _boardManager.Initialize(BoardTemplates.board_Three, 4, _playerMaterial);
     }
 }
