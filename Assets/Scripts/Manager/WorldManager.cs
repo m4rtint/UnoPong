@@ -46,7 +46,7 @@ namespace MPHT
 
         private void Start()
         {
-            _boardManager.Initialize(BoardTemplates.BoardThree, _numberOfPlayers, _playerMaterial);
+            _boardManager.Initialize(BoardTemplates.BoardThree, _numberOfPlayers, PlayerMaterial);
         }
 
         private void FixedUpdate()
