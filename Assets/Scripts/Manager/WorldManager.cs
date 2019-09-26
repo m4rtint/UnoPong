@@ -20,41 +20,41 @@ namespace MPHT
         //// TODO - Placeholder
         private static int _numberOfPlayers = 2;
         [Header("Managers")]
-		[SerializeField]
+        [SerializeField]
         private BoardManager _boardManager;
-	    [SerializeField]
-	    private PlayerManager _playerManager;
-	    private PlayerMaterials _playerMaterial;
+        [SerializeField]
+        private PlayerManager _playerManager;
+        private PlayerMaterials _playerMaterial;
 
-	    /// <summary>
-	    /// Called on every fixed update. All classes should be based on this
-	    /// </summary>
-	    public static event Action OnFixedUpdate;
+        /// <summary>
+        /// Called on every fixed update. All classes should be based on this
+        /// </summary>
+        public static event Action OnFixedUpdate;
 
-	    private PlayerMaterials PlayerMaterial
-	    {
-		    get
-		    {
-			    if (_playerMaterial == null)
-			    {
-				    _playerMaterial = GetComponent<PlayerMaterials>();
-			    }
+        private PlayerMaterials PlayerMaterial
+        {
+            get
+            {
+                if (_playerMaterial == null)
+                {
+                    _playerMaterial = GetComponent<PlayerMaterials>();
+                }
 
-			    return _playerMaterial;
-		    }
-	    }
+                return _playerMaterial;
+            }
+        }
 
-	    private void Start()
-	    {
-		    _boardManager.Initialize(BoardTemplates.BoardThree, _numberOfPlayers, _playerMaterial);
-	    }
+        private void Start()
+        {
+            _boardManager.Initialize(BoardTemplates.BoardThree, _numberOfPlayers, _playerMaterial);
+        }
 
-	    private void FixedUpdate()
-	    {
-		    if (OnFixedUpdate != null)
-		    {
-			    OnFixedUpdate();
-		    }
-	    }
+        private void FixedUpdate()
+        {
+            if (OnFixedUpdate != null)
+            {
+                OnFixedUpdate();
+            }
+        }
     }
 }
