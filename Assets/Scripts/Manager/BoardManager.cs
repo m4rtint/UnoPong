@@ -40,6 +40,11 @@ namespace MPHT
             SetupBoard(players, playerMaterials, boardTemplate);
         }
 
+        /// <summary>
+        /// Renders the outline of the board
+        /// </summary>
+        /// <param name="boardTemplate">template of the board to render</param>
+        /// <param name="playerMaterials">material loader</param>
         public void RenderOutline(bool[] boardTemplate, PlayerMaterials playerMaterials)
         {
             _boardBehaivour.CheckTemplate(boardTemplate, _boardOfBricks);
