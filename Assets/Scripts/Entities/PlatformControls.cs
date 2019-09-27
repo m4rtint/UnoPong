@@ -17,6 +17,18 @@ namespace MPHT
     {
         private Rigidbody2D _rigidBody;
         private PlayerPlatform _playerPlat;
+        private PlatformControlsBehaviour _behaviour = new PlatformControlsBehaviour();
+        private const float amount = 0.3f;
+        private bool _allowMovement = false;
+
+        /// <summary>
+        /// Allows or disallow movement for the platform
+        /// </summary>
+        public bool AllowMovement
+        {
+            get => _allowMovement;
+            set => _allowMovement = value;
+        }
 
         private PlayerPlatform PlayerPlat
         {
@@ -56,18 +68,9 @@ namespace MPHT
 
         private void PlatformControlOnUpdate()
         {
-            TranslatePlatform();
-        }
-
-        private void TranslatePlatform()
-        {
-            if (MPHT.InputManager.OnHorizontalPressed(PlayerPlat.Input) > 0)
+            if (AllowMovement)
             {
-                transform.position += new Vector3(0.3f, 0);
-            }
-            else if (MPHT.InputManager.OnHorizontalPressed(PlayerPlat.Input) < 0)
-            {
-                transform.position -= new Vector3(0.3f, 0);
+                transform.position += _behaviour.PlayerMovement(PlayerPlat, amount);
             }
         }
     }

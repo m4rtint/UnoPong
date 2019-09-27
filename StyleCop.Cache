@@ -15870,7 +15870,7 @@
   <sourcecode name="BoardTemplates.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.126</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -15893,7 +15893,7 @@
   <sourcecode name="Direction.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.127</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -15916,7 +15916,7 @@
   <sourcecode name="IMaterials.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.128</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -15939,7 +15939,7 @@
   <sourcecode name="Player.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.128</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -15962,7 +15962,7 @@
   <sourcecode name="PlayerMaterials.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.129</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -15985,7 +15985,7 @@
   <sourcecode name="Tags.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.131</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -16008,7 +16008,7 @@
   <sourcecode name="Utilities.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.131</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -16031,8 +16031,8 @@
   <sourcecode name="BricksAnimation.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
-      <sourceFile>2019-09-26 18:14:08.132</sourceFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
+      <sourceFile>2019-09-26 21:29:32.289</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>646861760</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -16054,7 +16054,7 @@
   <sourcecode name="BulletTime.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.133</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -16077,7 +16077,7 @@
   <sourcecode name="FXObjectPooler.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.134</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -16100,7 +16100,7 @@
   <sourcecode name="OnCollision.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.135</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -16123,8 +16123,8 @@
   <sourcecode name="PressToJoin.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
-      <sourceFile>2019-09-26 18:14:09.282</sourceFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
+      <sourceFile>2019-09-26 21:29:32.289</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>646861760</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -16146,7 +16146,7 @@
   <sourcecode name="SimpleCameraShake.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.135</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -16169,7 +16169,7 @@
   <sourcecode name="Ball.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.136</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -16192,7 +16192,7 @@
   <sourcecode name="Brick.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.137</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -16215,8 +16215,8 @@
   <sourcecode name="IPlatform.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
-      <sourceFile>2019-09-26 18:14:09.283</sourceFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
+      <sourceFile>2019-09-26 21:29:32.290</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>646861760</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -16238,7 +16238,7 @@
   <sourcecode name="PlatformControls.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.139</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -16261,8 +16261,8 @@
   <sourcecode name="PlayerPlatform.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
-      <sourceFile>2019-09-26 18:14:09.284</sourceFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
+      <sourceFile>2019-09-26 21:29:32.291</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>646861760</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -16284,7 +16284,7 @@
   <sourcecode name="BoardManager.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.141</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -16307,8 +16307,8 @@
   <sourcecode name="InputManager.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
-      <sourceFile>2019-09-26 20:56:14.417</sourceFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
+      <sourceFile>2019-09-26 21:29:32.292</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>646861760</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -16330,8 +16330,8 @@
   <sourcecode name="MainMenuManager.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
-      <sourceFile>2019-09-26 20:56:52.499</sourceFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
+      <sourceFile>2019-09-26 21:29:32.293</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>646861760</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -16353,8 +16353,8 @@
   <sourcecode name="MainMenuManagerBehaviour.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
-      <sourceFile>2019-09-26 20:58:38.392</sourceFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
+      <sourceFile>2019-09-26 21:33:16.241</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>646861760</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -16371,50 +16371,13 @@
       <StyleCop.CSharp.SpacingRules>2019-04-14 13:31:17.692</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="SingleLineCommentMustBePrecededByBlankLine" ruleCheckId="SA1515">
-        <context>A single-line comment must be preceded by a blank line or another single-line comment, or must be the first item in its scope. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
-        <line>123</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="OpeningCurlyBracketsMustNotBeFollowedByBlankLine" ruleCheckId="SA1505">
-        <context>An opening curly bracket must not be followed by a blank line.</context>
-        <line>126</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketsMustNotBePrecededByBlankLine" ruleCheckId="SA1508">
-        <context>A closing curly bracket must not be preceded by a blank line.</context>
-        <line>128</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="OpeningCurlyBracketsMustNotBeFollowedByBlankLine" ruleCheckId="SA1505">
-        <context>An opening curly bracket must not be followed by a blank line.</context>
-        <line>130</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketsMustNotBePrecededByBlankLine" ruleCheckId="SA1508">
-        <context>A closing curly bracket must not be preceded by a blank line.</context>
-        <line>132</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.SpacingRules" rule="SingleLineCommentsMustBeginWithSingleSpace" ruleCheckId="SA1005">
-        <context>The comment must start with a single space. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
-        <line>124</line>
-        <index>4751</index>
-        <endIndex>4782</endIndex>
-        <startLine>124</startLine>
-        <startColumn>13</startColumn>
-        <endLine>124</endLine>
-        <endColumn>44</endColumn>
-        <warning>False</warning>
-      </violation>
-    </violations>
+    <violations />
   </sourcecode>
   <sourcecode name="PlayerManager.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
-      <sourceFile>2019-09-26 18:14:09.287</sourceFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
+      <sourceFile>2019-09-26 21:29:32.296</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>646861760</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -16436,8 +16399,8 @@
   <sourcecode name="PlayerManagerBehaviour.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
-      <sourceFile>2019-09-26 18:14:09.288</sourceFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
+      <sourceFile>2019-09-26 21:29:32.297</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>646861760</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -16459,7 +16422,7 @@
   <sourcecode name="StateManager.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
       <sourceFile>2019-09-26 18:14:08.144</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
@@ -16482,8 +16445,8 @@
   <sourcecode name="WorldManager.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019-04-14 13:31:17.692</styleCop>
-      <settingsFile>2019-09-26 20:58:00.501</settingsFile>
-      <sourceFile>2019-09-26 18:14:09.288</sourceFile>
+      <settingsFile>2019-09-26 21:29:32.539</settingsFile>
+      <sourceFile>2019-09-26 21:29:32.297</sourceFile>
       <parser>2019-04-14 13:31:17.692</parser>
       <StyleCop.CSharp.DocumentationRules>2019-04-14 13:31:17.692</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>646861760</StyleCop.CSharp.DocumentationRules.FilesHashCode>

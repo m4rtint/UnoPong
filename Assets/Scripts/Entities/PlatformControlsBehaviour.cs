@@ -1,0 +1,53 @@
+﻿//-----------------------------------------------------------------------
+// <copyright file="PlatformControlsBehaviour.cs" company="Martin Pak Hei Tsang">
+//     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+namespace MPHT
+{
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+
+    /// <summary>
+    /// Platform control logic
+    /// </summary>
+    public class PlatformControlsBehaviour
+    {
+        public Vector3 PlayerMovement(PlayerPlatform playerPlat, float amount)
+        {
+            float input = 0;
+            bool isVerticalMovement = playerPlat.Direction == Direction.LEFT || playerPlat.Direction == Direction.RIGHT;
+            if (isVerticalMovement)
+            {
+                input = InputManager.OnVerticalPressed(playerPlat.Input);
+            }
+            else
+            {
+                input = InputManager.OnHorizontalPressed(playerPlat.Input);
+            }
+            
+            float direction = 0;
+            if (input > 0)
+            {
+                direction = 1;
+            }
+            else if (input < 0)
+            {
+                direction = -1;
+            }
+
+            Vector3 movementDirection = Vector3.zero;
+            if (isVerticalMovement)
+            {
+                movementDirection = new Vector3(0, amount * direction);
+            }
+            else
+            {
+                movementDirection = new Vector3(amount * direction, 0);
+            }
+
+            return movementDirection;
+        }
+    }
+}

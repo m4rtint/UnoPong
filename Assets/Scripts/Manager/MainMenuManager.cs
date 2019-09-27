@@ -117,8 +117,7 @@ namespace MPHT
         {
             _state++;
             RemoveStartFromDirection(direction, scheme);
-
-            // OnPlayerSelected(playerNumber, direction, scheme);
+            OnPlayerSelected(playerNumber, direction, scheme);
         }
     }
 }

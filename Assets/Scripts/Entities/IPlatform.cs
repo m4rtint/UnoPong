@@ -35,5 +35,10 @@ namespace MPHT
         /// <param name="mat">material of player</param>
         /// <param name="placement">which keys allow input</param>
         void Initialize(Vector3 position, Quaternion rotation, Direction direction, Player player, Material mat, ControlScheme placement);
+
+        /// <summary>
+        /// Set GameObject as inactive
+        /// </summary>
+        void TurnOffPlatform();
     }
 }

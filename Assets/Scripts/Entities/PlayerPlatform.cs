@@ -54,6 +54,31 @@ namespace MPHT
             _inputPlacement = placement;
             transform.position = position;
             transform.rotation = rotation;
+            AnimateOpeningOfPlatform();
+        }
+
+        /// <summary>
+        /// Set GameObject as inactive
+        /// </summary>
+        public void TurnOffPlatform()
+        {
+            gameObject.SetActive(false);
+        }
+
+        private void AnimateOpeningOfPlatform()
+        {
+            gameObject.SetActive(true);
+            SetControlsEnabled(false);
+            transform.localScale = new Vector3(0, 1);
+            transform.LeanScaleX(1, 1)
+                .setEaseOutBack()
+                .setOnComplete(() => { SetControlsEnabled(true); })
+                .setDelay(0.5f);
+        }
+
+        private void SetControlsEnabled(bool enable)
+        {
+            GetComponent<PlatformControls>().AllowMovement = enable;
         }
 
         private void Awake()

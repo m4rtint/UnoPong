@@ -44,6 +44,10 @@ namespace MPHT
         private void SetupPlayerPlatform()
         {
             _arrayOfPlayerPlatforms = GetComponentsInChildren<IPlatform>();
+            foreach (IPlatform plat in _arrayOfPlayerPlatforms)
+            {
+                plat.TurnOffPlatform();
+            }
         }
     }
 }

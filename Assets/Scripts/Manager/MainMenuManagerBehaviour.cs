@@ -15,7 +15,7 @@ namespace MPHT
     /// </summary>
     public class MainMenuManagerBehaviour
     {
-        private List<Direction> _listOfOpenDirections = new List<Direction>() { Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT } ;
+        private List<Direction> _listOfOpenDirections = new List<Direction>() { Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT };
         private HashSet<ControlScheme> _setOfTakenControlSchemes = new HashSet<ControlScheme>();
         private Direction _firstChosenDirection;
         private Player _currentPlayer = Player.PLAYER_ONE;
@@ -141,7 +141,7 @@ namespace MPHT
         }
 
         /// <summary>
-        /// Checks the last side for the 4th player to enter
+        /// Checks and allows fourth player to enter the game
         /// </summary>
         public void PlayerFourSelection()
         {

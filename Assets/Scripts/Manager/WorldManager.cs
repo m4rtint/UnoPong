@@ -49,6 +49,7 @@ namespace MPHT
         private void Awake()
         {
             _mainMenuManager.OnPlayerSelected += PlayerSelected;
+            _playerManager.Initialize(PlayerMaterial);
         }
 
         private void OnStartGame()
