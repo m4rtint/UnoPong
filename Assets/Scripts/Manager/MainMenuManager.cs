@@ -76,6 +76,9 @@ namespace MPHT
             switch (_state)
             {
                 case MenuState.PlayerSelection_PlayerOne:
+                    SelectScemeToPlayerOne();
+                    break;
+                case MenuState.PlayerSelection_PlayerTwo:
                     OnPlayerSelection();
                     break;
                 case MenuState.BoardSelection:
@@ -90,32 +93,33 @@ namespace MPHT
             SelectSchemeToPlayer(_currentPlayer);
         }
 
-        private void SelectSchemeToPlayer(Player player)
+        private void SelectScemeToPlayerOne()
         {
-            // Get Which KeyCode is pressed
             KeyCode key = InputManager.IsAnyKeyBeingPressed();
 
             if (key != KeyCode.None)
             {
-                //use Key to find direction
                 Direction chosenDirection = InputManager.GetDirectionFromKeyCode(key);
-                //use key to find control scheme
                 ControlScheme controls = InputManager.GetSchemeFromKeyCode(key);
-
+                
                 RemoveStartFromDirection(chosenDirection);
                 //OnPlayerSelected(player, chosenDirection, controls);
                 _currentPlayer++;
             }
         }
 
+        private void SelectSchemeToPlayer(Player player)
+        {
+            
+        }
+
         private void RemoveStartFromDirection(Direction direction)
         {
+            HashSet<Direction> listOfObjectsToDeactivate = _behaviour.DirectionToDeactivate(direction);
             foreach (PressToJoin join in PressToJoinSides)
             {
-                if (join.Direction == direction)
-                {
-                    join.gameObject.SetActive(false);
-                }
+                bool doDeactivate = listOfObjectsToDeactivate.Contains(join.Direction);
+                join.gameObject.SetActive(!doDeactivate);
             }
         }
     }

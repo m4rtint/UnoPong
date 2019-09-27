@@ -6,6 +6,7 @@
 namespace MPHT
 {
     using System;
+    using System.Collections.Generic;
     using UnityEngine;
     using MPHT;
 
@@ -14,6 +15,8 @@ namespace MPHT
     /// </summary>
     public class MainMenuManagerBehaviour
     {
+        private HashSet<Direction> _setOfTakenDirections = new HashSet<Direction>();
+
         /// <summary>
         /// Find the opposite direction of given direction
         /// </summary>
@@ -35,5 +38,28 @@ namespace MPHT
                     return Direction.UP;
             }
         }
+
+        /// <summary>
+        /// Which Direction start buttons to deactivate depending on state
+        /// </summary>
+        /// <param name="direction">Direction that was picked</param>
+        /// <returns>Set of Direction to deactivate</returns>
+        public HashSet<Direction> DirectionToDeactivate(Direction direction)
+        {
+            HashSet<Direction> directions = new HashSet<Direction>() { Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT };
+            _setOfTakenDirections.Add(direction);
+
+            if (_setOfTakenDirections.Count == 1)
+            {
+                directions.Remove(OppositeDirection(direction));
+            }
+            else
+            {
+                directions.IntersectWith(_setOfTakenDirections);
+            }
+
+            return directions;
+        }
+     
     }
 }
