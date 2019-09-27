@@ -69,7 +69,8 @@ namespace MPHT
 
         private void AnimateOpeningOfPlatform()
         {
-            MPHT.FXObjectPooler.Instance.SpawnFromPool(Effect.Blue_Brick_Break, transform.position, Quaternion.identity);
+            Effect fx = FXObjectPooler.Instance.GetMediumExplosionFromPlayer(_player);
+            FXObjectPooler.Instance.SpawnFromPool(fx, transform.position, Quaternion.identity);
             gameObject.SetActive(true);
             SetControlsEnabled(false);
             transform.localScale = new Vector3(0, 1);

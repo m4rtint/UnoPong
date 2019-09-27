@@ -17,7 +17,23 @@ namespace MPHT
         /// <summary>
         /// Blue Brick Break Particle Effect
         /// </summary>
-        Blue_Brick_Break
+        Blue_Brick_Break,
+
+        Medium_Blue_Explosion,
+
+        Red_Brick_Break,
+
+        Medium_Red_Explosion,
+
+        Yellow_Brick_Break,
+
+        Medium_Yellow_Explosion,
+
+        Green_Brick_Break,
+
+        Medium_Green_Explosion,
+
+        Default_Explosion
     }
 
     /// <summary>
@@ -89,6 +105,23 @@ namespace MPHT
                 }
 
                 this._poolDictionary.Add(pool.Tag, objectPool);
+            }
+        }
+
+        public Effect GetMediumExplosionFromPlayer(Player player)
+        {
+            switch (player)
+            {
+                case Player.PLAYER_ONE:
+                    return Effect.Medium_Red_Explosion;
+                case Player.PLAYER_TWO:
+                    return Effect.Medium_Blue_Explosion;
+                case Player.PLAYER_THREE:
+                    return Effect.Medium_Green_Explosion;
+                case Player.PLAYER_FOUR:
+                    return Effect.Medium_Yellow_Explosion;
+                default:
+                    return Effect.Default_Explosion;
             }
         }
     }
