@@ -18,13 +18,14 @@ namespace MPHT
 
         [SerializeField]
         private GameObject _brick;
-        private BoardManagerBehaivours boardBehaivour;
+        private BoardManagerBehaviour _boardBehaivour;
 
         private GameObject[] _boardOfBricks = new GameObject[_AmountOfBricks];
 
         public void Initialize()
         {
-            boardBehaivour = new BoardManagerBehaivours();
+            _boardBehaivour = new BoardManagerBehaviour();
+            InstantiateBoard();
         }
 
         /// <summary>
@@ -35,16 +36,19 @@ namespace MPHT
         /// <param name="playerMaterials">materials for player</param>
         public void InitializeChosenBoard(bool[] boardTemplate, int players, PlayerMaterials playerMaterials)
         {
-            boardBehaivour.CheckTemplate(boardTemplate, _boardOfBricks);
-            InstantiateBoard();
+            _boardBehaivour.CheckTemplate(boardTemplate, _boardOfBricks);
             SetupBoard(players, playerMaterials, boardTemplate);
         }
 
         public void RenderOutline(bool[] boardTemplate, PlayerMaterials playerMaterials)
         {
+            _boardBehaivour.CheckTemplate(boardTemplate, _boardOfBricks);
+            bool[] outlined = _boardBehaivour.BoardOutlinedBricks(boardTemplate, _WidthAndHeightOfGrid);
             for (int i = 0; i < _AmountOfBricks; i++)
             {
-
+                _boardOfBricks[i].transform.position = MPHT.Utilities.IndexToVector(i, _WidthAndHeightOfGrid);
+                _boardOfBricks[i].GetComponent<SpriteRenderer>().material = playerMaterials.GetDefaultMaterial();
+                _boardOfBricks[i].SetActive(outlined[i]);
             }
         }
 
@@ -54,6 +58,7 @@ namespace MPHT
             {
                 GameObject obj = (GameObject)Instantiate(_brick);
                 obj.transform.parent = transform;
+                obj.SetActive(false);
                 _boardOfBricks[i] = obj;
             }
         }
@@ -77,7 +82,7 @@ namespace MPHT
     /// <summary>
     /// Board Manager logic
     /// </summary>
-    public class BoardManagerBehaivours
+    public class BoardManagerBehaviour
     {
         /// <summary>
         /// Checks if the template board brick amount matches the amount of bricks on the scene
@@ -90,6 +95,17 @@ namespace MPHT
             {
                 throw new System.Exception($"Board template amount not exact: board has {board.Length} bricks, template has {boardTemplate.Length} bricks");
             }
+        }
+
+        /// <summary>
+        /// Returns the bricks which would make an outline of the shape
+        /// </summary>
+        /// <param name="boardTemplate">template of the board</param>
+        /// <returns>outlined shape of the board</returns>
+        public bool[] BoardOutlinedBricks(bool[] boardTemplate, int width)
+        {
+            // TODO
+            return boardTemplate;
         }
     }
 }

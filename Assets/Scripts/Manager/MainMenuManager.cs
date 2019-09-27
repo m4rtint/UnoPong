@@ -111,6 +111,7 @@ namespace MPHT
                     break;
                 case MenuState.BoardSelection:
                     OnBoardRender(BoardTemplates.BoardOne);
+                    _state++;
                     break;
                 case MenuState.InGame:
                     break;

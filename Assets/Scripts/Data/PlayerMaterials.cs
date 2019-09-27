@@ -45,4 +45,13 @@ public class PlayerMaterials : MonoBehaviour, IMaterials
                 return _defaultMaterial;
         }
     }
+
+    /// <summary>
+    /// Get Default colored material
+    /// </summary>
+    /// <returns>material for default color</returns>
+    public Material GetDefaultMaterial()
+    {
+        return _defaultMaterial;
+    }
 }

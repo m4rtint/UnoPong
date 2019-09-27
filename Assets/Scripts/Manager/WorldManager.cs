@@ -76,7 +76,7 @@ namespace MPHT
 
         private void BoardRender(bool[] board)
         {
-            _boardManager.
+            
         }
     }
 }
