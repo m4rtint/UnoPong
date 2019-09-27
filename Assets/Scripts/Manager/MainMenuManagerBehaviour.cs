@@ -15,7 +15,7 @@ namespace MPHT
     /// </summary>
     public class MainMenuManagerBehaviour
     {
-        private HashSet<Direction> _setOfTakenDirections = new HashSet<Direction>();
+        private List<Direction> _listOfOpenDirections = new List<Direction>() { Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT } ;
         private HashSet<ControlScheme> _setOfTakenControlSchemes = new HashSet<ControlScheme>();
         private Direction _firstChosenDirection;
         private Player _currentPlayer = Player.PLAYER_ONE;
@@ -61,17 +61,17 @@ namespace MPHT
         public HashSet<Direction> DirectionToDeactivate(Direction direction, ControlScheme controlScheme)
         {
             HashSet<Direction> directions = new HashSet<Direction>() { Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT };
-            _setOfTakenDirections.Add(direction);
+            _listOfOpenDirections.Remove(direction);
             _setOfTakenControlSchemes.Add(controlScheme);
 
-            if (_setOfTakenDirections.Count == 1)
+            if (_listOfOpenDirections.Count == 3)
             {
                 directions.Remove(OppositeDirection(direction));
                 _firstChosenDirection = direction;
             }
             else
             {
-                directions.IntersectWith(_setOfTakenDirections);
+                directions.ExceptWith(_listOfOpenDirections);
             }
 
             return directions;
@@ -119,14 +119,14 @@ namespace MPHT
         /// </summary>
         public void PlayerThreeSelection()
         {
-            if (_setOfTakenDirections.Count != 2)
+            if (_listOfOpenDirections.Count != 2)
             {
                 throw new Exception("This is supposed to only have 2 elements. If not there will be problems");
             }
 
             KeyCode key = KeyCode.None;
-            bool isVerticalTaken = _setOfTakenDirections.Contains(Direction.UP);
-            key = InputManager.IsKeyBeingPressOnAxis(isVerticalTaken);
+            bool isHorizontalAvailable = _listOfOpenDirections.Contains(Direction.LEFT);
+            key = InputManager.IsKeyBeingPressOnAxis(isHorizontalAvailable);
         
             if (key != KeyCode.None)
             {
@@ -140,9 +140,27 @@ namespace MPHT
             }
         }
 
+        /// <summary>
+        /// Checks the last side for the 4th player to enter
+        /// </summary>
         public void PlayerFourSelection()
         {
+            if (_listOfOpenDirections.Count != 1)
+            {
+                throw new Exception("At this stage, there is supposed to be only ONE left.");
+            }
 
+            Direction chosenDirection = _listOfOpenDirections[0];
+            KeyCode key = InputManager.IsKeyBeingPressedAt(chosenDirection);
+            if (key != KeyCode.None)
+            {
+                ControlScheme controls = InputManager.GetSchemeFromKeyCode(key);
+                if (!_setOfTakenControlSchemes.Contains(controls))
+                {
+                    OnPlatformSelected(_currentPlayer, chosenDirection, controls);
+                    _currentPlayer++;
+                }
+            }
         }
     }
 }

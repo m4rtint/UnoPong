@@ -95,6 +95,7 @@ namespace MPHT
                     break;
                 case MenuState.PlayerSelection_PlayerFour:
                     _behaviour.PlayerFourSelection();
+                    break;
                 case MenuState.BoardSelection:
                     break;
                 case MenuState.InGame:
