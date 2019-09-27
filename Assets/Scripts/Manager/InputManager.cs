@@ -15,12 +15,12 @@ namespace MPHT
     public enum ControlScheme
     {
         /// <summary>
-        /// WASD Contols
+        /// WASD Controls
         /// </summary>
         WASD,
 
         /// <summary>
-        /// YGHJ Contols
+        /// YGHJ Controls
         /// </summary>
         YGHJ,
 
@@ -53,10 +53,10 @@ namespace MPHT
         private const string _Horizontal = "_Horizontal";
         private const string _Vertical = "_Vertical";
 
-        private static List<KeyCode> _UpKeys = new List<KeyCode>(){ KeyCode.W, KeyCode.Y, KeyCode.P, KeyCode.UpArrow };
-        private static List<KeyCode> _DownKeys = new List<KeyCode>(){ KeyCode.S, KeyCode.H, KeyCode.Semicolon, KeyCode.DownArrow };
-        private static List<KeyCode> _LeftKeys = new List<KeyCode>(){ KeyCode.A, KeyCode.G, KeyCode.L, KeyCode.LeftArrow };
-        private static List<KeyCode> _RightKeys = new List<KeyCode>(){ KeyCode.D, KeyCode.J, KeyCode.Quote, KeyCode.RightArrow };
+        private static List<KeyCode> _UpKeys = new List<KeyCode>() { KeyCode.W, KeyCode.Y, KeyCode.P, KeyCode.UpArrow };
+        private static List<KeyCode> _DownKeys = new List<KeyCode>() { KeyCode.S, KeyCode.H, KeyCode.Semicolon, KeyCode.DownArrow };
+        private static List<KeyCode> _LeftKeys = new List<KeyCode>() { KeyCode.A, KeyCode.G, KeyCode.L, KeyCode.LeftArrow };
+        private static List<KeyCode> _RightKeys = new List<KeyCode>() { KeyCode.D, KeyCode.J, KeyCode.Quote, KeyCode.RightArrow };
 
         /// <summary>
         /// Check if the horizontal keys are pressed
@@ -81,66 +81,73 @@ namespace MPHT
         /// <summary>
         /// Checks which key is being pressed
         /// </summary>
-        /// <returns>Control Scheme/returns>
+        /// <returns>Control Scheme</returns>
         public static KeyCode IsAnyKeyBeingPressed()
         {
             KeyCode key = KeyCode.None;
-            key = IsUpBeingPressed();
+            key = IsKeyBeingPressOnAxis(true);
             if (key != KeyCode.None)
             {
                 return key;
             }
 
-            key = IsDownBeingPressed();
-            if (key != KeyCode.None)
-            {
-                return key;
-            }
-
-            key = IsLeftBeingPressed();
-            if (key != KeyCode.None)
-            {
-                return key;
-            }
-
-            key = IsRightBeingPressed();
+            key = IsKeyBeingPressOnAxis(false);
             return key;
         }
 
         /// <summary>
-        /// Returns which up key is being pressed
+        /// Is Key Code Being Pressed at specific direction
         /// </summary>
-        /// <returns>key Code</returns>
-        public static KeyCode IsUpBeingPressed()
+        /// <param name="direction">Direction being pressed</param>
+        /// <returns>Key that is pressed</returns>
+        public static KeyCode IsKeyBeingPressedAt(Direction direction)
         {
-            return IsKeyBeingPressedFromDirection(_UpKeys);
+            KeyCode key = KeyCode.None;
+            switch (direction)
+            {
+                case Direction.UP:
+                    return IsUpBeingPressed();
+                case Direction.DOWN:
+                    return IsDownBeingPressed();
+                case Direction.LEFT:
+                    return IsLeftBeingPressed();
+                case Direction.RIGHT:
+                    return IsRightBeingPressed();
+            }
+
+            return key;
         }
 
         /// <summary>
-        /// Returns which left key is being pressed
+        /// Checks either axis if the keys are being pressed
         /// </summary>
-        /// <returns>key Code</returns>
-        public static KeyCode IsLeftBeingPressed()
+        /// <param name="isHorizontalAxis">Is checking Horizontal Axis</param>
+        /// <returns>KeyCode being pressed</returns>
+        public static KeyCode IsKeyBeingPressOnAxis(bool isHorizontalAxis)
         {
-            return IsKeyBeingPressedFromDirection(_LeftKeys);
-        }
+            KeyCode key = KeyCode.None;
+            if (isHorizontalAxis)
+            {
+                key = IsLeftBeingPressed();
+                if (key != KeyCode.None)
+                {
+                    return key;
+                }
 
-        /// <summary>
-        /// Returns which right key is being pressed
-        /// </summary>
-        /// <returns>key Code</returns>
-        public static KeyCode IsRightBeingPressed()
-        {
-            return IsKeyBeingPressedFromDirection(_RightKeys);
-        }
+                key = IsRightBeingPressed();
+            }
+            else
+            {
+                key = IsUpBeingPressed();
+                if (key != KeyCode.None)
+                {
+                    return key;
+                }
 
-        /// <summary>
-        /// Returns which down key is being pressed
-        /// </summary>
-        /// <returns>key Code</returns>
-        public static KeyCode IsDownBeingPressed()
-        {
-            return IsKeyBeingPressedFromDirection(_DownKeys);
+                key = IsDownBeingPressed();
+            }
+
+            return key;
         }
 
         /// <summary>
@@ -200,6 +207,26 @@ namespace MPHT
             }
 
             return Direction.UP;
+        }
+
+        private static KeyCode IsUpBeingPressed()
+        {
+            return IsKeyBeingPressedFromDirection(_UpKeys);
+        }
+
+        private static KeyCode IsLeftBeingPressed()
+        {
+            return IsKeyBeingPressedFromDirection(_LeftKeys);
+        }
+
+        private static KeyCode IsRightBeingPressed()
+        {
+            return IsKeyBeingPressedFromDirection(_RightKeys);
+        }
+
+        private static KeyCode IsDownBeingPressed()
+        {
+            return IsKeyBeingPressedFromDirection(_DownKeys);
         }
 
         private static KeyCode IsKeyBeingPressedFromDirection(List<KeyCode> keys)

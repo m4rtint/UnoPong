@@ -31,6 +31,11 @@ namespace MPHT
         PlayerSelection_PlayerThree,
 
         /// <summary>
+        /// Player selects direction for player four
+        /// </summary>
+        PlayerSelection_PlayerFour,
+
+        /// <summary>
         /// Select the board
         /// </summary>
         BoardSelection,
@@ -49,10 +54,13 @@ namespace MPHT
         [SerializeField]
         private PressToJoin[] _pressToJoinSides;
         private MenuState _state = MenuState.PlayerSelection_PlayerOne;
-        private Player _currentPlayer = Player.PLAYER_ONE;
-        private Direction _firstChosenDirection;
 
         private MainMenuManagerBehaviour _behaviour = new MainMenuManagerBehaviour();
+
+        /// <summary>
+        /// Called when player selected initial position of platform
+        /// </summary>
+        public event Action<Player, Direction, ControlScheme> OnPlayerSelected;
 
         private PressToJoin[] PressToJoinSides
         {
@@ -66,21 +74,27 @@ namespace MPHT
                 return _pressToJoinSides;
             }
         }
-        /// <summary>
-        /// Called when player selected initial position of platform
-        /// </summary>
-        public event Action<Player, Direction, ControlScheme> OnPlayerSelected;
+
+        private void Awake()
+        {
+            _behaviour.OnPlatformSelected += OnPlatformSelected;
+        }
 
         private void Update()
         {
             switch (_state)
             {
                 case MenuState.PlayerSelection_PlayerOne:
-                    SelectScemeToPlayerOne();
+                    _behaviour.PlayerOneSelection();
                     break;
                 case MenuState.PlayerSelection_PlayerTwo:
-                    OnPlayerSelection();
+                    _behaviour.PlayerTwoSelection();
                     break;
+                case MenuState.PlayerSelection_PlayerThree:
+                    _behaviour.PlayerThreeSelection();
+                    break;
+                case MenuState.PlayerSelection_PlayerFour:
+                    _behaviour.PlayerFourSelection();
                 case MenuState.BoardSelection:
                     break;
                 case MenuState.InGame:
@@ -88,39 +102,22 @@ namespace MPHT
             }
         }
 
-        private void OnPlayerSelection()
+        private void RemoveStartFromDirection(Direction direction, ControlScheme scheme)
         {
-            SelectSchemeToPlayer(_currentPlayer);
-        }
-
-        private void SelectScemeToPlayerOne()
-        {
-            KeyCode key = InputManager.IsAnyKeyBeingPressed();
-
-            if (key != KeyCode.None)
-            {
-                Direction chosenDirection = InputManager.GetDirectionFromKeyCode(key);
-                ControlScheme controls = InputManager.GetSchemeFromKeyCode(key);
-                
-                RemoveStartFromDirection(chosenDirection);
-                //OnPlayerSelected(player, chosenDirection, controls);
-                _currentPlayer++;
-            }
-        }
-
-        private void SelectSchemeToPlayer(Player player)
-        {
-            
-        }
-
-        private void RemoveStartFromDirection(Direction direction)
-        {
-            HashSet<Direction> listOfObjectsToDeactivate = _behaviour.DirectionToDeactivate(direction);
+            HashSet<Direction> listOfObjectsToDeactivate = _behaviour.DirectionToDeactivate(direction, scheme);
             foreach (PressToJoin join in PressToJoinSides)
             {
-                bool doDeactivate = listOfObjectsToDeactivate.Contains(join.Direction);
-                join.gameObject.SetActive(!doDeactivate);
+                bool activate = !listOfObjectsToDeactivate.Contains(join.Direction);
+                join.gameObject.SetActive(activate);
             }
+        }
+        
+        private void OnPlatformSelected(Player playerNumber, Direction direction, ControlScheme scheme)
+        {
+            _state++;
+            RemoveStartFromDirection(direction, scheme);
+
+            // OnPlayerSelected(playerNumber, direction, scheme);
         }
     }
 }
