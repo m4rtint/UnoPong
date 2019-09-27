@@ -13,6 +13,7 @@ namespace MPHT
     /// <summary>
     /// Player platform properties
     /// </summary>
+    [RequireComponent(typeof(TrailRenderer))]
     [RequireComponent(typeof(PlatformControls))]
     [RequireComponent(typeof(SpriteRenderer))]
     public class PlayerPlatform : MonoBehaviour, IPlatform
@@ -52,6 +53,7 @@ namespace MPHT
             _player = player;
             _spriteRenderer.material = mat;
             _inputPlacement = placement;
+            GetComponent<TrailRenderer>().material = mat;
             transform.position = position;
             transform.rotation = rotation;
             AnimateOpeningOfPlatform();
@@ -67,6 +69,7 @@ namespace MPHT
 
         private void AnimateOpeningOfPlatform()
         {
+            MPHT.FXObjectPooler.Instance.SpawnFromPool(Effect.Blue_Brick_Break, transform.position, Quaternion.identity);
             gameObject.SetActive(true);
             SetControlsEnabled(false);
             transform.localScale = new Vector3(0, 1);

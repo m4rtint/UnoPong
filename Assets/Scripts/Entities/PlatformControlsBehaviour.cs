@@ -17,8 +17,8 @@ namespace MPHT
         public Vector3 PlayerMovement(PlayerPlatform playerPlat, float amount)
         {
             float input = 0;
-            bool isVerticalMovement = playerPlat.Direction == Direction.LEFT || playerPlat.Direction == Direction.RIGHT;
-            if (isVerticalMovement)
+            
+            if (IsVerticalMovement(playerPlat))
             {
                 input = InputManager.OnVerticalPressed(playerPlat.Input);
             }
@@ -38,7 +38,7 @@ namespace MPHT
             }
 
             Vector3 movementDirection = Vector3.zero;
-            if (isVerticalMovement)
+            if (IsVerticalMovement(playerPlat))
             {
                 movementDirection = new Vector3(0, amount * direction);
             }
@@ -48,6 +48,23 @@ namespace MPHT
             }
 
             return movementDirection;
+        }
+
+        public Vector3 ClampedPosition(PlayerPlatform playerPlat, Vector3 position)
+        {
+            if (IsVerticalMovement(playerPlat))
+            {
+                return new Vector3(position.x, Mathf.Clamp(position.y, -3, 3));
+            }
+            else
+            {
+                return new Vector3(Mathf.Clamp(position.x, -3, 3), position.y);
+            }
+        }
+
+        private bool IsVerticalMovement(PlayerPlatform player)
+        {
+            return player.Direction == Direction.LEFT || player.Direction == Direction.RIGHT;
         }
     }
 }
