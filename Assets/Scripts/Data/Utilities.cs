@@ -24,7 +24,7 @@ namespace MPHT
         /// <param name="widthAndHeight">width or height of board</param>
         /// <returns>position of index</returns>
         public static Vector3 IndexToVector(int i, int widthAndHeight)
-       { 
+        { 
             Vector3 position = Vector3.zero;
 
             if (i < 0)
@@ -39,6 +39,17 @@ namespace MPHT
             }
 
             return position;
+        }
+
+        /// <summary>
+        /// Takes index of board and checks if it's on an edge
+        /// </summary>
+        /// <param name="i">index on board</param>
+        /// <param name="widthAndHeight">width or height of board</param>
+        /// <returns>is index on edge</returns>
+        public static bool IsIndexOnAnEdge(int i, int widthAndHeight)
+        {
+            return false;
         }
 
         /// <summary>

@@ -9,6 +9,7 @@ namespace MPHT
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.UI;
 
     /// <summary>
     /// Infinite State Machine for main menu state
@@ -53,6 +54,10 @@ namespace MPHT
     {
         [SerializeField]
         private PressToJoin[] _pressToJoinSides;
+        [SerializeField]
+        private Button _nextButton;
+        [SerializeField]
+        private Button _startButton;
         private MenuState _state = MenuState.PlayerSelection_PlayerOne;
 
         private MainMenuManagerBehaviour _behaviour = new MainMenuManagerBehaviour();
@@ -61,6 +66,11 @@ namespace MPHT
         /// Called when player selected initial position of platform
         /// </summary>
         public event Action<Player, Direction, ControlScheme> OnPlayerSelected;
+
+        /// <summary>
+        /// Render boad outline
+        /// </summary>
+        public event Action<bool[]> OnBoardRender;
 
         private PressToJoin[] PressToJoinSides
         {
@@ -78,6 +88,8 @@ namespace MPHT
         private void Awake()
         {
             _behaviour.OnPlatformSelected += OnPlatformSelected;
+            SetupNextButton();
+            SetupStartButton();
         }
 
         private void Update()
@@ -92,14 +104,48 @@ namespace MPHT
                     break;
                 case MenuState.PlayerSelection_PlayerThree:
                     _behaviour.PlayerThreeSelection();
+                    _nextButton.interactable = true;
                     break;
                 case MenuState.PlayerSelection_PlayerFour:
                     _behaviour.PlayerFourSelection();
                     break;
                 case MenuState.BoardSelection:
+                    OnBoardRender(BoardTemplates.BoardOne);
                     break;
                 case MenuState.InGame:
                     break;
+            }
+        }
+
+        private void SetupNextButton()
+        {
+            _nextButton.interactable = false;
+            _nextButton.onClick.AddListener(() =>
+            {
+                if ((int)_state <= 3)
+                {
+                    _state = MenuState.BoardSelection;
+                    RemoveAllPressToJoin();
+                    _nextButton.gameObject.SetActive(false);
+                }
+            });
+        }
+
+        private void SetupStartButton()
+        {
+            _startButton.onClick.AddListener(() =>
+            {
+
+            });
+            _startButton.gameObject.SetActive(false);
+
+        }
+
+        private void RemoveAllPressToJoin()
+        {
+            foreach (PressToJoin join in PressToJoinSides)
+            {
+                join.gameObject.SetActive(false);
             }
         }
 

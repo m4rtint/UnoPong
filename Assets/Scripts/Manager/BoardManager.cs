@@ -18,8 +18,14 @@ namespace MPHT
 
         [SerializeField]
         private GameObject _brick;
+        private BoardManagerBehaivours boardBehaivour;
 
         private GameObject[] _boardOfBricks = new GameObject[_AmountOfBricks];
+
+        public void Initialize()
+        {
+            boardBehaivour = new BoardManagerBehaivours();
+        }
 
         /// <summary>
         /// Initializes the board according to template and players
@@ -27,12 +33,19 @@ namespace MPHT
         /// <param name="boardTemplate">template for the board</param>
         /// <param name="players">amount of players in game</param>
         /// <param name="playerMaterials">materials for player</param>
-        public void Initialize(bool[] boardTemplate, int players, PlayerMaterials playerMaterials)
+        public void InitializeChosenBoard(bool[] boardTemplate, int players, PlayerMaterials playerMaterials)
         {
-            BoardManagerBehaivours boardBehaivour = new BoardManagerBehaivours();
             boardBehaivour.CheckTemplate(boardTemplate, _boardOfBricks);
             InstantiateBoard();
             SetupBoard(players, playerMaterials, boardTemplate);
+        }
+
+        public void RenderOutline(bool[] boardTemplate, PlayerMaterials playerMaterials)
+        {
+            for (int i = 0; i < _AmountOfBricks; i++)
+            {
+
+            }
         }
 
         private void InstantiateBoard()

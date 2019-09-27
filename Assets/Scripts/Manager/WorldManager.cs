@@ -49,12 +49,14 @@ namespace MPHT
         private void Awake()
         {
             _mainMenuManager.OnPlayerSelected += PlayerSelected;
+            _mainMenuManager.OnBoardRender += BoardRender;
             _playerManager.Initialize(PlayerMaterial);
+            _boardManager.Initialize();
         }
 
         private void OnStartGame()
         {
-            //// _boardManager.Initialize(BoardTemplates.BoardThree, _numberOfPlayers, PlayerMaterial);
+            _boardManager.InitializeChosenBoard(BoardTemplates.BoardThree, _numberOfPlayers, PlayerMaterial);
         }
 
         private void OnDestroy()
@@ -70,6 +72,11 @@ namespace MPHT
         private void PlayerSelected(Player player, Direction direction, ControlScheme scheme)
         {
             _playerManager.AddPlayer(player, direction, scheme);
+        }
+
+        private void BoardRender(bool[] board)
+        {
+            _boardManager.
         }
     }
 }
