@@ -19,20 +19,44 @@ namespace MPHT
         /// </summary>
         Blue_Brick_Break,
 
+        /// <summary>
+		/// Medium size blue explosion
+		/// </summary>
         Medium_Blue_Explosion,
 
+        /// <summary>
+		/// Red brick explosions
+		/// </summary>
         Red_Brick_Break,
 
+        /// <summary>
+		/// Medium size red explosion
+		/// </summary>
         Medium_Red_Explosion,
 
+        /// <summary>
+		/// Yellow brick explosions
+		/// </summary>
         Yellow_Brick_Break,
 
+        /// <summary>
+		/// Medium Sized yellow explosion
+		/// </summary>
         Medium_Yellow_Explosion,
 
+        /// <summary>
+		/// Green brick explosions
+		/// </summary>
         Green_Brick_Break,
 
+        /// <summary>
+		/// Medium sized green explosions
+		/// </summary>
         Medium_Green_Explosion,
 
+        /// <summary>
+		/// Default colored explosions
+		/// </summary>
         Default_Explosion
     }
 
@@ -77,7 +101,29 @@ namespace MPHT
             return newObj;
         }
 
-        private void Awake()
+		/// <summary>
+		/// Get the Particle effect for medium sized explosions depending on player
+		/// </summary>
+		/// <param name="player">player number</param>
+		/// <returns>Effect tag</returns>
+		public Effect GetMediumExplosionFromPlayer(Player player)
+		{
+			switch (player)
+			{
+				case Player.PLAYER_ONE:
+					return Effect.Medium_Red_Explosion;
+				case Player.PLAYER_TWO:
+					return Effect.Medium_Blue_Explosion;
+				case Player.PLAYER_THREE:
+					return Effect.Medium_Green_Explosion;
+				case Player.PLAYER_FOUR:
+					return Effect.Medium_Yellow_Explosion;
+				default:
+					return Effect.Default_Explosion;
+			}
+		}
+
+		private void Awake()
         {
             _instance = this;
         }
@@ -105,23 +151,6 @@ namespace MPHT
                 }
 
                 this._poolDictionary.Add(pool.Tag, objectPool);
-            }
-        }
-
-        public Effect GetMediumExplosionFromPlayer(Player player)
-        {
-            switch (player)
-            {
-                case Player.PLAYER_ONE:
-                    return Effect.Medium_Red_Explosion;
-                case Player.PLAYER_TWO:
-                    return Effect.Medium_Blue_Explosion;
-                case Player.PLAYER_THREE:
-                    return Effect.Medium_Green_Explosion;
-                case Player.PLAYER_FOUR:
-                    return Effect.Medium_Yellow_Explosion;
-                default:
-                    return Effect.Default_Explosion;
             }
         }
     }

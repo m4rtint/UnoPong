@@ -20,11 +20,11 @@ namespace MPHT
             
             if (IsVerticalMovement(playerPlat))
             {
-                input = InputManager.OnVerticalPressed(playerPlat.Input);
+                input = InputManager.Instance.OnVerticalPressed(playerPlat.Input);
             }
             else
             {
-                input = InputManager.OnHorizontalPressed(playerPlat.Input);
+                input = InputManager.Instance.OnHorizontalPressed(playerPlat.Input);
             }
             
             float direction = 0;

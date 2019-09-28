@@ -19,6 +19,16 @@ namespace MPHT
         private HashSet<ControlScheme> _setOfTakenControlSchemes = new HashSet<ControlScheme>();
         private Direction _firstChosenDirection;
         private Player _currentPlayer = Player.PLAYER_ONE;
+        private IInputManager _inputManager;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainMenuManagerBehaviour" /> class.
+        /// </summary>
+        /// <param name="inputManager">Input Manager</param>
+        public MainMenuManagerBehaviour(IInputManager inputManager)
+        {
+            _inputManager = inputManager;
+        }
 
         /// <summary>
         /// On Platform selected, pass data back
@@ -26,9 +36,57 @@ namespace MPHT
         public event Action<Player, Direction, ControlScheme> OnPlatformSelected;
 
         /// <summary>
-        /// The first platform direction to be chosen
+        /// Gets or Set of taken control schemes
         /// </summary>
-        public Direction FirstChosenDirection => _firstChosenDirection;
+        public HashSet<ControlScheme> SetOfTakenControlSchemes
+        {
+            get
+            {
+                return _setOfTakenControlSchemes;
+            }
+
+            private set
+            {
+                _setOfTakenControlSchemes = value;
+            }
+        }
+
+        /// <summary>
+        /// The Current Player choosing the platform
+        /// </summary>
+        public Player CurrentPlayer => _currentPlayer;
+
+        /// <summary>
+        /// Gets List of available directions
+        /// </summary>
+        public List<Direction> ListOfOpenDirections
+        {
+            get
+            {
+                return _listOfOpenDirections;
+            }
+
+            private set
+            {
+                _listOfOpenDirections = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets Input Manager for dependency injection
+        /// </summary>
+        public IInputManager InputManager
+        {
+            get
+            {
+                if (_inputManager == null)
+                {
+                    _inputManager = MPHT.InputManager.Instance;
+                }
+
+                return _inputManager;
+            }
+        }
 
         /// <summary>
         /// Find the opposite direction of given direction
@@ -61,8 +119,8 @@ namespace MPHT
         public HashSet<Direction> DirectionToDeactivate(Direction direction, ControlScheme controlScheme)
         {
             HashSet<Direction> directions = new HashSet<Direction>() { Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT };
-            _listOfOpenDirections.Remove(direction);
-            _setOfTakenControlSchemes.Add(controlScheme);
+            ListOfOpenDirections.Remove(direction);
+            SetOfTakenControlSchemes.Add(controlScheme);
 
             if (_listOfOpenDirections.Count == 3)
             {
@@ -83,13 +141,12 @@ namespace MPHT
         /// </summary>
         public void PlayerOneSelection()
         {
-            KeyCode key = InputManager.IsAnyKeyBeingPressed();
+            KeyCode key = _inputManager.IsAnyKeyBeingPressed();
             if (key != KeyCode.None)
             {
-                Direction chosenDirection = InputManager.GetDirectionFromKeyCode(key);
-                ControlScheme controls = InputManager.GetSchemeFromKeyCode(key);
-
-                OnPlatformSelected(_currentPlayer, chosenDirection, controls);
+                Direction chosenDirection = _inputManager.GetDirectionFromKeyCode(key);
+                ControlScheme controls = _inputManager.GetSchemeFromKeyCode(key);
+                OnPlatformSelected?.Invoke(_currentPlayer, chosenDirection, controls);
                 _currentPlayer++;
             }
         }
@@ -100,14 +157,14 @@ namespace MPHT
         /// </summary>
         public void PlayerTwoSelection()
         {
-            Direction chosenDirection = OppositeDirection(FirstChosenDirection);
+            Direction chosenDirection = OppositeDirection(_firstChosenDirection);
             KeyCode key = InputManager.IsKeyBeingPressedAt(chosenDirection);
             if (key != KeyCode.None)
             {
                 ControlScheme controls = InputManager.GetSchemeFromKeyCode(key);
-                if (!_setOfTakenControlSchemes.Contains(controls))
+                if (!SetOfTakenControlSchemes.Contains(controls))
                 {
-                    OnPlatformSelected(_currentPlayer, chosenDirection, controls);
+                    OnPlatformSelected?.Invoke(_currentPlayer, chosenDirection, controls);
                     _currentPlayer++;
                 }
             }
@@ -119,22 +176,21 @@ namespace MPHT
         /// </summary>
         public void PlayerThreeSelection()
         {
-            if (_listOfOpenDirections.Count != 2)
+            if (ListOfOpenDirections.Count != 2)
             {
                 throw new Exception("This is supposed to only have 2 elements. If not there will be problems");
             }
 
-            KeyCode key = KeyCode.None;
             bool isHorizontalAvailable = _listOfOpenDirections.Contains(Direction.LEFT);
-            key = InputManager.IsKeyBeingPressOnAxis(isHorizontalAvailable);
+            KeyCode key = InputManager.IsKeyBeingPressOnAxis(isHorizontalAvailable);
         
             if (key != KeyCode.None)
             {
                 Direction chosenDirection = InputManager.GetDirectionFromKeyCode(key);
                 ControlScheme controls = InputManager.GetSchemeFromKeyCode(key);
-                if (!_setOfTakenControlSchemes.Contains(controls))
+                if (!SetOfTakenControlSchemes.Contains(controls))
                 {
-                    OnPlatformSelected(_currentPlayer, chosenDirection, controls);
+                    OnPlatformSelected?.Invoke(_currentPlayer, chosenDirection, controls);
                     _currentPlayer++;
                 }
             }
@@ -157,7 +213,7 @@ namespace MPHT
                 ControlScheme controls = InputManager.GetSchemeFromKeyCode(key);
                 if (!_setOfTakenControlSchemes.Contains(controls))
                 {
-                    OnPlatformSelected(_currentPlayer, chosenDirection, controls);
+                    OnPlatformSelected?.Invoke(_currentPlayer, chosenDirection, controls);
                     _currentPlayer++;
                 }
             }

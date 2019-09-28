@@ -22,6 +22,9 @@ namespace MPHT
 
         private GameObject[] _boardOfBricks = new GameObject[_AmountOfBricks];
 
+        /// <summary>
+        /// Initializes the Board manager
+        /// </summary>
         public void Initialize()
         {
             _boardBehaivour = new BoardManagerBehaviour();

@@ -43,7 +43,7 @@ namespace MPHT
     /// <summary>
     /// Manages all input
     /// </summary>
-    public class InputManager
+    public class InputManager : IInputManager
     {
         private const string _WASD = "WASD";
         private const string _YGHJ = "YGHJ";
@@ -53,17 +53,35 @@ namespace MPHT
         private const string _Horizontal = "_Horizontal";
         private const string _Vertical = "_Vertical";
 
-        private static List<KeyCode> _UpKeys = new List<KeyCode>() { KeyCode.W, KeyCode.Y, KeyCode.P, KeyCode.UpArrow };
-        private static List<KeyCode> _DownKeys = new List<KeyCode>() { KeyCode.S, KeyCode.H, KeyCode.Semicolon, KeyCode.DownArrow };
-        private static List<KeyCode> _LeftKeys = new List<KeyCode>() { KeyCode.A, KeyCode.G, KeyCode.L, KeyCode.LeftArrow };
-        private static List<KeyCode> _RightKeys = new List<KeyCode>() { KeyCode.D, KeyCode.J, KeyCode.Quote, KeyCode.RightArrow };
+        private static InputManager _instance;
+
+        private List<KeyCode> _UpKeys = new List<KeyCode>() { KeyCode.W, KeyCode.Y, KeyCode.P, KeyCode.UpArrow };
+        private List<KeyCode> _DownKeys = new List<KeyCode>() { KeyCode.S, KeyCode.H, KeyCode.Semicolon, KeyCode.DownArrow };
+        private List<KeyCode> _LeftKeys = new List<KeyCode>() { KeyCode.A, KeyCode.G, KeyCode.L, KeyCode.LeftArrow };
+        private List<KeyCode> _RightKeys = new List<KeyCode>() { KeyCode.D, KeyCode.J, KeyCode.Quote, KeyCode.RightArrow };
+
+        /// <summary>
+        /// Gets Singleton to access methods
+        /// </summary>
+        public static InputManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new InputManager();
+                }
+
+                return _instance;
+            }
+        }
 
         /// <summary>
         /// Check if the horizontal keys are pressed
         /// </summary>
         /// <param name="placement">control scheme</param>
         /// <returns>axis value</returns>
-        public static float OnHorizontalPressed(ControlScheme placement)
+        public float OnHorizontalPressed(ControlScheme placement)
         {
             return OnKeysPressed(placement, true);
         }
@@ -73,7 +91,7 @@ namespace MPHT
         /// </summary>
         /// <param name="placement">control scheme</param>
         /// <returns>axis value</returns>
-        public static float OnVerticalPressed(ControlScheme placement)
+        public float OnVerticalPressed(ControlScheme placement)
         {
             return OnKeysPressed(placement, false);
         }
@@ -82,10 +100,9 @@ namespace MPHT
         /// Checks which key is being pressed
         /// </summary>
         /// <returns>Control Scheme</returns>
-        public static KeyCode IsAnyKeyBeingPressed()
+        public KeyCode IsAnyKeyBeingPressed()
         {
-            KeyCode key = KeyCode.None;
-            key = IsKeyBeingPressOnAxis(true);
+            KeyCode key = IsKeyBeingPressOnAxis(true);
             if (key != KeyCode.None)
             {
                 return key;
@@ -100,7 +117,7 @@ namespace MPHT
         /// </summary>
         /// <param name="direction">Direction being pressed</param>
         /// <returns>Key that is pressed</returns>
-        public static KeyCode IsKeyBeingPressedAt(Direction direction)
+        public KeyCode IsKeyBeingPressedAt(Direction direction)
         {
             KeyCode key = KeyCode.None;
             switch (direction)
@@ -123,7 +140,7 @@ namespace MPHT
         /// </summary>
         /// <param name="isHorizontalAxis">Is checking Horizontal Axis</param>
         /// <returns>KeyCode being pressed</returns>
-        public static KeyCode IsKeyBeingPressOnAxis(bool isHorizontalAxis)
+        public KeyCode IsKeyBeingPressOnAxis(bool isHorizontalAxis)
         {
             KeyCode key = KeyCode.None;
             if (isHorizontalAxis)
@@ -155,7 +172,7 @@ namespace MPHT
         /// </summary>
         /// <param name="key">key code</param>
         /// <returns>Control scheme</returns>
-        public static ControlScheme GetSchemeFromKeyCode(KeyCode key)
+        public ControlScheme GetSchemeFromKeyCode(KeyCode key)
         {
             if (key == KeyCode.A || key == KeyCode.W || key == KeyCode.S || key == KeyCode.D)
             {
@@ -184,7 +201,7 @@ namespace MPHT
         /// </summary>
         /// <param name="key">key code</param>
         /// <returns>Direction of key</returns>
-        public static Direction GetDirectionFromKeyCode(KeyCode key)
+        public Direction GetDirectionFromKeyCode(KeyCode key)
         {
             if (_UpKeys.Contains(key))
             {
@@ -209,27 +226,27 @@ namespace MPHT
             return Direction.UP;
         }
 
-        private static KeyCode IsUpBeingPressed()
+        private KeyCode IsUpBeingPressed()
         {
             return IsKeyBeingPressedFromDirection(_UpKeys);
         }
 
-        private static KeyCode IsLeftBeingPressed()
+        private KeyCode IsLeftBeingPressed()
         {
             return IsKeyBeingPressedFromDirection(_LeftKeys);
         }
 
-        private static KeyCode IsRightBeingPressed()
+        private KeyCode IsRightBeingPressed()
         {
             return IsKeyBeingPressedFromDirection(_RightKeys);
         }
 
-        private static KeyCode IsDownBeingPressed()
+        private KeyCode IsDownBeingPressed()
         {
             return IsKeyBeingPressedFromDirection(_DownKeys);
         }
 
-        private static KeyCode IsKeyBeingPressedFromDirection(List<KeyCode> keys)
+        private KeyCode IsKeyBeingPressedFromDirection(List<KeyCode> keys)
         {
             foreach (KeyCode key in keys)
             {
@@ -242,7 +259,7 @@ namespace MPHT
             return KeyCode.None;
         }
 
-        private static float OnKeysPressed(ControlScheme placement, bool isHorizontal)
+        private float OnKeysPressed(ControlScheme placement, bool isHorizontal)
         {
             string axisName = string.Empty;
             switch (placement)

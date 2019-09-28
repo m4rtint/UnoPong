@@ -60,7 +60,7 @@ namespace MPHT
         private Button _startButton;
         private MenuState _state = MenuState.PlayerSelection_PlayerOne;
 
-        private MainMenuManagerBehaviour _behaviour = new MainMenuManagerBehaviour();
+        private MainMenuManagerBehaviour _behaviour = new MainMenuManagerBehaviour(InputManager.Instance);
 
         /// <summary>
         /// Called when player selected initial position of platform
