@@ -14,6 +14,13 @@ namespace MPHT
     /// </summary>
     public class PlatformControlsBehaviour
     {
+        private const float clampedPosition = 3.0f;
+        /// <summary>
+        /// Gets the amount the player can move
+        /// </summary>
+        /// <param name="playerPlat">Player Platform</param>
+        /// <param name="amount">speed amount</param>
+        /// <returns>move amount</returns>
         public Vector3 PlayerMovement(PlayerPlatform playerPlat, float amount)
         {
             float input = 0;
@@ -50,15 +57,16 @@ namespace MPHT
             return movementDirection;
         }
 
+
         public Vector3 ClampedPosition(PlayerPlatform playerPlat, Vector3 position)
         {
             if (IsVerticalMovement(playerPlat))
             {
-                return new Vector3(position.x, Mathf.Clamp(position.y, -3, 3));
+                return new Vector3(position.x, Mathf.Clamp(position.y, -clampedPosition, clampedPosition));
             }
             else
             {
-                return new Vector3(Mathf.Clamp(position.x, -3, 3), position.y);
+                return new Vector3(Mathf.Clamp(position.x, -clampedPosition, clampedPosition), position.y);
             }
         }
 

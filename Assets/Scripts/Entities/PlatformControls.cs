@@ -14,15 +14,15 @@ namespace MPHT
     /// Handles movement for platform
     /// </summary>
     public class PlatformControls : MonoBehaviour
-	{
-		private const float amount = 0.3f;
-		private Rigidbody2D _rigidBody;
+    {
+        private const float _Amount = 0.3f;
+        private Rigidbody2D _rigidBody;
         private PlayerPlatform _playerPlat;
         private PlatformControlsBehaviour _behaviour = new PlatformControlsBehaviour();
         private bool _allowMovement = false;
 
         /// <summary>
-        /// Gets or Sets Allow or disallow movement for the platform
+        /// Gets or sets Allow or disallow movement for the platform
         /// </summary>
         public bool AllowMovement
         {
@@ -70,7 +70,7 @@ namespace MPHT
         {
             if (AllowMovement)
             {
-                transform.position += _behaviour.PlayerMovement(PlayerPlat, amount);
+                transform.position += _behaviour.PlayerMovement(PlayerPlat, _Amount);
                 transform.position = _behaviour.ClampedPosition(PlayerPlat, transform.position);
             }
         }

@@ -18,7 +18,7 @@ namespace MPHT
 
         [SerializeField]
         private GameObject _brick;
-        private BoardManagerBehaviour _boardBehaivour;
+        private BoardManagerBehaviour _boardBehaviour;
 
         private GameObject[] _boardOfBricks = new GameObject[_AmountOfBricks];
 
@@ -27,7 +27,7 @@ namespace MPHT
         /// </summary>
         public void Initialize()
         {
-            _boardBehaivour = new BoardManagerBehaviour();
+            _boardBehaviour = new BoardManagerBehaviour();
             InstantiateBoard();
         }
 
@@ -39,7 +39,7 @@ namespace MPHT
         /// <param name="playerMaterials">materials for player</param>
         public void InitializeChosenBoard(bool[] boardTemplate, int players, PlayerMaterials playerMaterials)
         {
-            _boardBehaivour.CheckTemplate(boardTemplate, _boardOfBricks);
+            _boardBehaviour.CheckTemplate(boardTemplate, _boardOfBricks);
             SetupBoard(players, playerMaterials, boardTemplate);
         }
 
@@ -50,8 +50,8 @@ namespace MPHT
         /// <param name="playerMaterials">material loader</param>
         public void RenderOutline(bool[] boardTemplate, PlayerMaterials playerMaterials)
         {
-            _boardBehaivour.CheckTemplate(boardTemplate, _boardOfBricks);
-            bool[] outlined = _boardBehaivour.BoardOutlinedBricks(boardTemplate, _WidthAndHeightOfGrid);
+            _boardBehaviour.CheckTemplate(boardTemplate, _boardOfBricks);
+            bool[] outlined = _boardBehaviour.OutlinedBricks(boardTemplate, _WidthAndHeightOfGrid);
             for (int i = 0; i < _AmountOfBricks; i++)
             {
                 ActivateBrick(i, playerMaterials.GetDefaultMaterial(), outlined[i]);
@@ -79,7 +79,7 @@ namespace MPHT
 
         private void ActivateBrick(int index, Material mat, bool isActive)
         {
-            _boardOfBricks[index].transform.position = MPHT.Utilities.IndexToVector(index, _WidthAndHeightOfGrid);
+            _boardOfBricks[index].transform.position = _boardBehaviour.IndexToVector(index, _WidthAndHeightOfGrid);
             _boardOfBricks[index].GetComponent<SpriteRenderer>().material = mat;
             _boardOfBricks[index].SetActive(isActive);
         }
