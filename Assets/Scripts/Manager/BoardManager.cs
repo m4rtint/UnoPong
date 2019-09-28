@@ -79,9 +79,19 @@ namespace MPHT
 
         private void ActivateBrick(int index, Material mat, bool isActive)
         {
-            _boardOfBricks[index].transform.position = _boardBehaviour.IndexToVector(index, _WidthAndHeightOfGrid);
-            _boardOfBricks[index].GetComponent<SpriteRenderer>().material = mat;
-            _boardOfBricks[index].SetActive(isActive);
+            GameObject brick = _boardOfBricks[index];
+            brick.transform.position = _boardBehaviour.IndexToVector(index, _WidthAndHeightOfGrid);
+            brick.GetComponent<SpriteRenderer>().material = mat;
+            brick.SetActive(isActive);
+            AnimateBrick(index);
+        }
+
+        private void AnimateBrick(int index)
+        {
+            _boardOfBricks[index].transform.localScale = Vector3.zero;
+            _boardOfBricks[index].LeanScale(Vector3.one, 0.1f)
+                .setDelay(0.1f * index/_WidthAndHeightOfGrid)
+                .setEaseOutCirc();
         }
 
         private Material GetRandomMaterial(int players, PlayerMaterials mat)

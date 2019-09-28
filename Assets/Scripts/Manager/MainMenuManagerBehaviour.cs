@@ -157,7 +157,7 @@ namespace MPHT
         /// </summary>
         public void PlayerTwoSelection()
         {
-            if (ListOfOpenDirections.Count != 1)
+            if (SetOfTakenControlSchemes.Count != 1)
             {
                 throw new Exception("This is supposed to only have 1 elements. If not there will be problems");
             }
@@ -181,7 +181,7 @@ namespace MPHT
         /// </summary>
         public void PlayerThreeSelection()
         {
-            if (ListOfOpenDirections.Count != 2)
+            if (SetOfTakenControlSchemes.Count != 2)
             {
                 throw new Exception("This is supposed to only have 2 elements. If not there will be problems");
             }
@@ -206,7 +206,7 @@ namespace MPHT
         /// </summary>
         public void PlayerFourSelection()
         {
-            if (ListOfOpenDirections.Count != 1)
+            if (SetOfTakenControlSchemes.Count != 3)
             {
                 throw new Exception("At this stage, there is supposed to be only ONE left.");
             }
