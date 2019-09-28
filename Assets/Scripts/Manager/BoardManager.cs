@@ -54,9 +54,7 @@ namespace MPHT
             bool[] outlined = _boardBehaivour.BoardOutlinedBricks(boardTemplate, _WidthAndHeightOfGrid);
             for (int i = 0; i < _AmountOfBricks; i++)
             {
-                _boardOfBricks[i].transform.position = MPHT.Utilities.IndexToVector(i, _WidthAndHeightOfGrid);
-                _boardOfBricks[i].GetComponent<SpriteRenderer>().material = playerMaterials.GetDefaultMaterial();
-                _boardOfBricks[i].SetActive(outlined[i]);
+                ActivateBrick(i, playerMaterials.GetDefaultMaterial(), outlined[i]);
             }
         }
 
@@ -75,10 +73,15 @@ namespace MPHT
         {
             for (int i = 0; i < _AmountOfBricks; i++)
             {
-                _boardOfBricks[i].transform.position = MPHT.Utilities.IndexToVector(i, _WidthAndHeightOfGrid);
-                _boardOfBricks[i].GetComponent<SpriteRenderer>().material = GetRandomMaterial(players, playerMaterials);
-                _boardOfBricks[i].SetActive(boardTemplate[i]);
+                ActivateBrick(i, GetRandomMaterial(players, playerMaterials), boardTemplate[i]);
             }
+        }
+
+        private void ActivateBrick(int index, Material mat, bool isActive)
+        {
+            _boardOfBricks[index].transform.position = MPHT.Utilities.IndexToVector(index, _WidthAndHeightOfGrid);
+            _boardOfBricks[index].GetComponent<SpriteRenderer>().material = mat;
+            _boardOfBricks[index].SetActive(isActive);
         }
 
         private Material GetRandomMaterial(int players, PlayerMaterials mat)
