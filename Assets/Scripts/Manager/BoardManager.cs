@@ -90,7 +90,7 @@ namespace MPHT
         {
             _boardOfBricks[index].transform.localScale = Vector3.zero;
             _boardOfBricks[index].LeanScale(Vector3.one, 0.1f)
-                .setDelay(0.1f * index/_WidthAndHeightOfGrid)
+                .setDelay(0.1f * Mathf.Floor(index/_WidthAndHeightOfGrid))
                 .setEaseOutCirc();
         }
 
