@@ -179,5 +179,59 @@ namespace Tests
             //Assert
             Assert.AreEqual(expectedDirection, actualDirection);
         }
+
+        [Test]
+        public void GetPositionFromDirection_With_North_Equal_Vector()
+        {
+            //Arrange
+            PlayerManagerBehaviour behaviour = new PlayerManagerBehaviour(mat);
+
+            //Act
+
+            //Assert
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void GetPositionFromDirection_With_South_Equal_Vector()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void GetPositionFromDirection_With_East_Equal_Vector()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void GetPositionFromDirection_With_West_Equal_Vector()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void GetRotationFromDirection_With_North_Equal_Quarternion()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void GetRotationFromDirection_With_East_Equal_Quarternion()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void GetRotationFromDirection_With_West_Equal_Quarternion()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void GetRotationFromDirection_With_South_Equal_Quarternion()
+        {
+            Assert.AreEqual(true, false);
+        }
     }
 }
