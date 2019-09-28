@@ -45,7 +45,7 @@ namespace MPHT
                 return _setOfTakenControlSchemes;
             }
 
-            private set
+            set
             {
                 _setOfTakenControlSchemes = value;
             }
@@ -66,7 +66,7 @@ namespace MPHT
                 return _listOfOpenDirections;
             }
 
-            private set
+            set
             {
                 _listOfOpenDirections = value;
             }
@@ -157,11 +157,16 @@ namespace MPHT
         /// </summary>
         public void PlayerTwoSelection()
         {
+            if (ListOfOpenDirections.Count != 1)
+            {
+                throw new Exception("This is supposed to only have 1 elements. If not there will be problems");
+            }
+
             Direction chosenDirection = OppositeDirection(_firstChosenDirection);
-            KeyCode key = InputManager.IsKeyBeingPressedAt(chosenDirection);
+            KeyCode key = _inputManager.IsKeyBeingPressedAt(chosenDirection);
             if (key != KeyCode.None)
             {
-                ControlScheme controls = InputManager.GetSchemeFromKeyCode(key);
+                ControlScheme controls = _inputManager.GetSchemeFromKeyCode(key);
                 if (!SetOfTakenControlSchemes.Contains(controls))
                 {
                     OnPlatformSelected?.Invoke(_currentPlayer, chosenDirection, controls);
@@ -181,7 +186,7 @@ namespace MPHT
                 throw new Exception("This is supposed to only have 2 elements. If not there will be problems");
             }
 
-            bool isHorizontalAvailable = _listOfOpenDirections.Contains(Direction.LEFT);
+            bool isHorizontalAvailable = ListOfOpenDirections.Contains(Direction.LEFT);
             KeyCode key = InputManager.IsKeyBeingPressOnAxis(isHorizontalAvailable);
         
             if (key != KeyCode.None)
@@ -201,12 +206,12 @@ namespace MPHT
         /// </summary>
         public void PlayerFourSelection()
         {
-            if (_listOfOpenDirections.Count != 1)
+            if (ListOfOpenDirections.Count != 1)
             {
                 throw new Exception("At this stage, there is supposed to be only ONE left.");
             }
 
-            Direction chosenDirection = _listOfOpenDirections[0];
+            Direction chosenDirection = ListOfOpenDirections[0];
             KeyCode key = InputManager.IsKeyBeingPressedAt(chosenDirection);
             if (key != KeyCode.None)
             {

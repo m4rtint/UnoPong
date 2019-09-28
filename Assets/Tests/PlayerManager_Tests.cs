@@ -233,5 +233,17 @@ namespace Tests
         {
             Assert.AreEqual(true, false);
         }
+
+        [Test]
+        public void CheckPlayerAvailabilityCount_With_Correct_Count_With_Exception()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void CheckPlayerAvailabilityCount_With_Wrong_Count_No_Exception()
+        {
+            Assert.AreEqual(true, false);
+        }
     }
 }

@@ -144,7 +144,6 @@ namespace Tests
         public void PlayerOneSelection_With_W_Pressed_Delegate_Called_With_Correct_Arguments()
         {
             //Arrange
-            //InputManager.Instance.IsAnyKeyBeingPressed().Returns(KeyCode.A);
             IInputManager manager = Substitute.For<IInputManager>();
             manager.IsAnyKeyBeingPressed().Returns(KeyCode.W);
             _behaviour = new MainMenuManagerBehaviour(manager);
@@ -164,7 +163,115 @@ namespace Tests
         [Test]
         public void PlayerOneSelection_With_Wrong_Key_Pressed_Delegate_Not_Called_Player_Not_Incremented()
         {
-            Assert.True(false);
+            //Arrange
+            IInputManager manager = Substitute.For<IInputManager>();
+            KeyCode f = KeyCode.None;
+            manager.IsAnyKeyBeingPressed().Returns(f);
+            _behaviour = new MainMenuManagerBehaviour(manager);
+
+            
+            Player expectedPlayer = Player.PLAYER_ONE;
+
+            //Act
+            _behaviour.PlayerOneSelection();
+
+            //Assert
+            manager.DidNotReceive().GetDirectionFromKeyCode(f);
+            manager.DidNotReceive().GetSchemeFromKeyCode(f);
+            Assert.AreEqual(expectedPlayer, _behaviour.CurrentPlayer);
         }
+
+        [Test]
+        public void PlayerTwoSelection_With_Key_Pressed_Where_Control_Scheme_Not_Taken_CurrentPlayer_3()
+        {   
+            //Arrange
+            IInputManager manager = Substitute.For<IInputManager>();
+            manager.IsKeyBeingPressedAt(default).ReturnsForAnyArgs(KeyCode.W);
+            manager.IsAnyKeyBeingPressed().Returns(KeyCode.DownArrow);
+            _behaviour = new MainMenuManagerBehaviour(manager);
+
+            //Act
+            _behaviour.PlayerOneSelection();
+            _behaviour.PlayerTwoSelection();
+
+            //Assert
+            Assert.AreEqual(Player.PLAYER_THREE, _behaviour.CurrentPlayer);
+        }
+
+        [Test]
+        public void PlayerTwoSelection_With_Key_Pressed_Where_Control_Scheme_Taken_CurrentPlayer_2()
+        {
+            //Arrange
+            IInputManager manager = Substitute.For<IInputManager>();
+            manager.IsKeyBeingPressedAt(default).ReturnsForAnyArgs(KeyCode.W);
+            manager.IsAnyKeyBeingPressed().Returns(KeyCode.DownArrow);
+            _behaviour = new MainMenuManagerBehaviour(manager);
+            _behaviour.SetOfTakenControlSchemes = new HashSet<ControlScheme>() { ControlScheme.WASD };
+            
+            //Act
+            _behaviour.PlayerOneSelection();
+            _behaviour.PlayerTwoSelection();
+
+            //Assert
+            Assert.AreEqual(Player.PLAYER_TWO, _behaviour.CurrentPlayer);
+        }
+
+        [Test]
+        public void PlayerTwoSelection_Without_One_ListOfOpenDirections_Throw_Exception()
+        {
+            //Arrange
+            _behaviour.ListOfOpenDirections = new List<Direction>(){};
+
+            //Act
+            //Assert
+            Assert.Catch(() => { _behaviour.PlayerTwoSelection(); });
+        }
+
+        [Test]
+        public void PlayerThreeSelection_Without_Two_ListOfOpenDirections_Throw_Exception()
+        {
+            //Arrange
+            _behaviour.ListOfOpenDirections = new List<Direction>() { };
+
+            //Act
+            //Assert
+            Assert.Catch(() => { _behaviour.PlayerTwoSelection(); });
+        }
+
+        [Test]
+        public void PlayerThreeSelection_With_Key_Pressed_Where_Control_Scheme_Taken_CurrentPlayer_3()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void PlayerThreeSelection_With_Key_Pressed_Where_Control_Scheme_Not_Taken_CurrentPlayer_4()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void PlayerFourSelection_With_Key_Pressed_Where_Control_Scheme_Taken_CurrentPlayer_3()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void PlayerFourSelection_With_Key_Pressed_Where_Control_Scheme_Not_Taken_CurrentPlayer_4()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void PlayerFourSelection_Without_Two_ListOfOpenDirections_Throw_Exception()
+        {
+            //Arrange
+            _behaviour.ListOfOpenDirections = new List<Direction>() { };
+
+            //Act
+            //Assert
+            Assert.Catch(() => { _behaviour.PlayerFourSelection(); });
+        }
+
     }
 }
