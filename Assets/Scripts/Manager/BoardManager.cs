@@ -50,11 +50,20 @@ namespace MPHT
         /// <param name="playerMaterials">material loader</param>
         public void RenderOutline(bool[] boardTemplate, PlayerMaterials playerMaterials)
         {
+            TurnOffAllBricks();
             _boardBehaviour.CheckTemplate(boardTemplate, _boardOfBricks);
             bool[] outlined = _boardBehaviour.OutlinedBricks(boardTemplate, _WidthAndHeightOfGrid);
             for (int i = 0; i < _AmountOfBricks; i++)
             {
                 ActivateBrick(i, playerMaterials.GetDefaultMaterial(), outlined[i]);
+            }
+        }
+
+        private void TurnOffAllBricks()
+        {
+            foreach(GameObject brick in _boardOfBricks)
+            {
+                brick.SetActive(false);
             }
         }
 
@@ -92,6 +101,7 @@ namespace MPHT
             _boardOfBricks[index].LeanScale(Vector3.one, 0.1f)
                 .setDelay(0.1f * Mathf.Floor(index/_WidthAndHeightOfGrid))
                 .setEaseOutCirc();
+            
         }
 
         private Material GetRandomMaterial(int players, PlayerMaterials mat)

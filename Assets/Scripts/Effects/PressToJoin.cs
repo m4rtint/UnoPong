@@ -29,6 +29,22 @@ namespace MPHT
         /// </summary>
         public Direction Direction => _direction;
 
+        /// <summary>
+        /// Keyboard key icons
+        /// </summary>
+        public Image KeyIcon
+        {
+            get
+            {
+                if (_keyIcon == null)
+                {
+                    _keyIcon = GetComponentInChildren<Image>();
+                }
+
+                return _keyIcon;
+            }
+        }
+
         public void SetSideAsDisabled()
         {
             foreach(TextMeshProUGUI text in _pressToStart)
@@ -46,7 +62,7 @@ namespace MPHT
 
         private void Awake()
         {
-            _keyIcon.gameObject.LeanScale(Vector3.one * 0.8f, 1f).setLoopPingPong(int.MaxValue);
+            KeyIcon.gameObject.LeanScale(Vector3.one * 0.8f, 1f).setLoopPingPong(int.MaxValue);
         }
     }
 }

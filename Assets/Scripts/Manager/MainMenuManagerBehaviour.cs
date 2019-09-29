@@ -15,11 +15,14 @@ namespace MPHT
     /// </summary>
     public class MainMenuManagerBehaviour
     {
+        private IInputManager _inputManager;
         private List<Direction> _listOfOpenDirections = new List<Direction>() { Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT };
         private HashSet<ControlScheme> _setOfTakenControlSchemes = new HashSet<ControlScheme>();
         private Direction _firstChosenDirection;
+
+        // Data to pass back
         private Player _currentPlayer = Player.PLAYER_ONE;
-        private IInputManager _inputManager;
+        private int _currentBoardSelection = 0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainMenuManagerBehaviour" /> class.
@@ -55,6 +58,11 @@ namespace MPHT
         /// The Current Player choosing the platform
         /// </summary>
         public Player CurrentPlayer => _currentPlayer;
+
+        /// <summary>
+        /// Current Board Selection
+        /// </summary>
+        public int CurrentBoardSelection => _currentBoardSelection;
 
         /// <summary>
         /// Gets List of available directions
@@ -222,6 +230,20 @@ namespace MPHT
                     _currentPlayer++;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns board to render in board selection
+        /// </summary>
+        /// <param name="left">is cycling to left</param>
+        /// <returns>board to render</returns>
+        public bool[] CycleThroughBoards(bool left)
+        {
+            LeanTween.cancelAll();
+            _currentBoardSelection += left ? -1 : 1;
+            _currentBoardSelection = (_currentBoardSelection < 0) ? BoardTemplates.Boards.Length - 1 : _currentBoardSelection;
+
+            return BoardTemplates.Boards[_currentBoardSelection];
         }
     }
 }

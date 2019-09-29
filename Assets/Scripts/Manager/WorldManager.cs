@@ -17,8 +17,6 @@ namespace MPHT
     [RequireComponent(typeof(PlayerMaterials))]
     public class WorldManager : MonoBehaviour
     {
-        //// TODO - Placeholder
-        private static int _numberOfPlayers = 2;
         [Header("Managers")]
         [SerializeField]
         private BoardManager _boardManager;
@@ -50,13 +48,14 @@ namespace MPHT
         {
             _mainMenuManager.OnPlayerSelected += PlayerSelected;
             _mainMenuManager.OnBoardRender += BoardRender;
+            _mainMenuManager.OnGameStart += OnStartGame;
             _playerManager.Initialize(PlayerMaterial);
             _boardManager.Initialize();
         }
 
-        private void OnStartGame()
+        private void OnStartGame(bool[] board, Player player)
         {
-            _boardManager.InitializeChosenBoard(BoardTemplates.BoardThree, _numberOfPlayers, PlayerMaterial);
+            _boardManager.InitializeChosenBoard(board, (int) player, PlayerMaterial);
         }
 
         private void OnDestroy()

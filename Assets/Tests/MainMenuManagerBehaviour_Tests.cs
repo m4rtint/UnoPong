@@ -273,5 +273,29 @@ namespace Tests
             Assert.Catch(() => { _behaviour.PlayerFourSelection(); });
         }
 
+        [Test]
+        public void CycleThroughBoards_With_Board_One_To_The_Right_Equal_Index()
+        {
+            // 1 -> 2
+        }
+
+        [Test]
+        public void CycleThroughBoards_With_Board_One_To_The_Left_Equal_Index()
+        {
+            // 1 -> 3
+        }
+
+        [Test]
+        public void CycleThroughBoards_With_Board_Three_To_The_Left_Equal_Index()
+        {
+            // 3 -> 2
+        }
+
+        [Test]
+        public void CycleThroughBoards_With_Board_Three_To_The_Right_Equal_Index()
+        {
+            //3 -> 1
+        }
+
     }
 }

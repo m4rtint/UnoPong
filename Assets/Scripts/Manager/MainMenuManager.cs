@@ -54,10 +54,13 @@ namespace MPHT
     {
         [SerializeField]
         private PressToJoin[] _pressToJoinSides;
+        [Header("Buttons")]
         [SerializeField]
         private Button _nextButton;
         [SerializeField]
         private Button _startButton;
+        [SerializeField]
+        private BoardSelectionManager _boardSelection;
         private MenuState _state = MenuState.PlayerSelection_PlayerOne;
 
         private MainMenuManagerBehaviour _behaviour = new MainMenuManagerBehaviour(InputManager.Instance);
@@ -71,6 +74,7 @@ namespace MPHT
         /// Render boad outline
         /// </summary>
         public event Action<bool[]> OnBoardRender;
+        public event Action<bool[], Player> OnGameStart;
 
         private PressToJoin[] PressToJoinSides
         {
@@ -88,6 +92,7 @@ namespace MPHT
         private void Awake()
         {
             _behaviour.OnPlatformSelected += OnPlatformSelected;
+            _boardSelection.OnChangeBoardClick += OnChangeBoard;
             SetupNextButton();
             SetupStartButton();
         }
@@ -110,12 +115,15 @@ namespace MPHT
                     _behaviour.PlayerFourSelection();
                     break;
                 case MenuState.BoardSelection:
-                    OnBoardRender(BoardTemplates.BoardOne);
-                    _state++;
                     break;
                 case MenuState.InGame:
                     break;
             }
+        }
+
+        private void OnChangeBoard(bool left)
+        {
+            OnBoardRender(_behaviour.CycleThroughBoards(left));
         }
 
         private void SetupNextButton()
@@ -125,21 +133,34 @@ namespace MPHT
             {
                 if ((int)_state <= 3)
                 {
-                    _state = MenuState.BoardSelection;
-                    RemoveAllPressToJoin();
-                    _nextButton.gameObject.SetActive(false);
+                    ActivateBoardSelection();
                 }
             });
         }
 
+        private void ActivateBoardSelection()
+        {
+            _state = MenuState.BoardSelection;
+            RemoveAllPressToJoin();
+            _nextButton.gameObject.SetActive(false);
+            SetBoardSelectionActiveStates(true);
+            OnBoardRender(BoardTemplates.BoardOne);
+        }
+
         private void SetupStartButton()
         {
+            _startButton.gameObject.SetActive(false);
             _startButton.onClick.AddListener(() =>
             {
-
+                _startButton.gameObject.SetActive(false);
+                OnGameStart(BoardTemplates.Boards[_behaviour.CurrentBoardSelection], _behaviour.CurrentPlayer); 
             });
-            _startButton.gameObject.SetActive(false);
+        }
 
+        private void SetBoardSelectionActiveStates(bool state)
+        {
+            _startButton.gameObject.SetActive(true);
+            _boardSelection.gameObject.SetActive(true);
         }
 
         private void RemoveAllPressToJoin()
@@ -163,6 +184,11 @@ namespace MPHT
         private void OnPlatformSelected(Player playerNumber, Direction direction, ControlScheme scheme)
         {
             _state++;
+            if (_state == MenuState.BoardSelection)
+            {
+                ActivateBoardSelection();
+            }
+
             RemoveStartFromDirection(direction, scheme);
             OnPlayerSelected(playerNumber, direction, scheme);
         }
