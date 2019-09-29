@@ -46,9 +46,9 @@ namespace MPHT
         /// <param name="placement">Keyboard control scheme</param>
         public void PlatformInitialize(IPlatform platform, Direction dir, Player player, ControlScheme placement)
         {
-            Vector3 position = this.GetPositionFromDirection(dir);
-            Quaternion rotation = this.GetRotationFromDirection(dir);
-            Material playerColor = this._playerMaterials.GetPlayerMaterialFor(player);
+            Vector3 position = GetPositionFromDirection(dir);
+            Quaternion rotation = GetRotationFromDirection(dir);
+            Material playerColor = _playerMaterials.GetPlayerMaterialFor(player);
 
             platform.Initialize(position, rotation, dir, player, playerColor, placement);
         }

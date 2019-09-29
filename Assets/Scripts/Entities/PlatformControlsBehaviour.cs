@@ -15,6 +15,9 @@ namespace MPHT
     public class PlatformControlsBehaviour
     {
         private const float clampedPosition = 3.0f;
+        private const float verticalAngle = 90f;
+        private const float bentPlatformRotation = 20f;
+
         /// <summary>
         /// Gets the amount the player can move
         /// </summary>
@@ -55,6 +58,38 @@ namespace MPHT
             }
 
             return movementDirection;
+        }
+
+        /// <summary>
+        /// On Press veritcal or horizontal buttons, platform rotates by 20 degrees
+        /// </summary>
+        /// <param name="playerPlat">platform to rotate</param>
+        /// <returns></returns>
+        public Quaternion PlayerRotation(PlayerPlatform playerPlat)
+        {
+            float input = 0;
+            bool isVertical = IsVerticalMovement(playerPlat);
+            if (!isVertical)
+            {
+                input = InputManager.Instance.OnVerticalPressed(playerPlat.Input);
+            }
+            else
+            {
+                input = InputManager.Instance.OnHorizontalPressed(playerPlat.Input);
+            }
+
+            float angle = isVertical ? verticalAngle : 0;
+            Quaternion rotation = Quaternion.Euler(0, 0, angle);
+            if (input > 0)
+            {
+                rotation = Quaternion.Euler(0, 0, angle + bentPlatformRotation);
+            }
+            else if (input < 0)
+            {
+                rotation = Quaternion.Euler(0, 0, angle - bentPlatformRotation);
+            }
+
+            return rotation;
         }
 
 

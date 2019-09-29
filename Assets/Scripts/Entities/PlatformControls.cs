@@ -72,6 +72,7 @@ namespace MPHT
             {
                 transform.position += _behaviour.PlayerMovement(PlayerPlat, _Amount);
                 transform.position = _behaviour.ClampedPosition(PlayerPlat, transform.position);
+                transform.rotation = _behaviour.PlayerRotation(PlayerPlat);
             }
         }
     }

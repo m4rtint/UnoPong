@@ -44,5 +44,41 @@ namespace Tests
         {
             Assert.AreEqual(true, false);
         }
+
+        [Test]
+        public void PlayerRotation_With_Vertical_Movement_On_Horizontal_Press_Quart_Equal()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void PlayerRotation_With_Vertical_Movement_On_Vertical_Press_Quart_Equal()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void PlayerRotation_With_Vertical_Movement_On_No_Press_Quart_Equal()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void PlayerRotation_With_Horizontal_Movement_On_Vertical_Press_Quart_Equal()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void PlayerRotation_With_Horizontal_Movement_On_Horizontal_Press_Quart_Equal()
+        {
+            Assert.AreEqual(true, false);
+        }
+
+        [Test]
+        public void PlayerRotation_With_Horizontal_Movement_On_No_Press_Quart_Equal()
+        {
+            Assert.AreEqual(true, false);
+        }
     }
 }
