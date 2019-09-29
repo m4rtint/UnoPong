@@ -29,5 +29,10 @@ namespace MPHT
         {
             GetComponent<Rigidbody2D>().AddForce(direction * _force);
         }
+
+        private void Update()
+        {
+            Debug.Log("Physics :" + GetComponent<Rigidbody2D>().velocity.magnitude);
+        }
     }
 }
