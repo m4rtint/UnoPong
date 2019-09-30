@@ -39,7 +39,7 @@ namespace MPHT
         public event Action<Player, Direction, ControlScheme> OnPlatformSelected;
 
         /// <summary>
-        /// Gets or Set of taken control schemes
+        /// Gets or sets of taken control schemes
         /// </summary>
         public HashSet<ControlScheme> SetOfTakenControlSchemes
         {
@@ -65,7 +65,7 @@ namespace MPHT
         public int CurrentBoardSelection => _currentBoardSelection;
 
         /// <summary>
-        /// Gets List of available directions
+        /// Gets or sets List of available directions
         /// </summary>
         public List<Direction> ListOfOpenDirections
         {

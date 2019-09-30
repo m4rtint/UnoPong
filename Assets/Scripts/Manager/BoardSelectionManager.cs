@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="BoardSelection.cs" company="Martin Pak Hei Tsang">
+// <copyright file="BoardSelectionManager.cs" company="Martin Pak Hei Tsang">
 //     Copyright (c) Martin Pak Hei Tsang. 2019 All Rights Reserved
 // </copyright>
 //-----------------------------------------------------------------------
@@ -26,7 +26,7 @@ public class BoardSelectionManager : MonoBehaviour
 
     private void Awake()
     {
-        _left.onClick.AddListener(delegate { OnChangeBoardClick?.Invoke(false); } );
-        _right.onClick.AddListener(delegate { OnChangeBoardClick?.Invoke(true); } );
+        _left.onClick.AddListener(delegate { OnChangeBoardClick?.Invoke(false); });
+        _right.onClick.AddListener(delegate { OnChangeBoardClick?.Invoke(true); });
     }
 }

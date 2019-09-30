@@ -49,13 +49,12 @@ namespace MPHT
             _mainMenuManager.OnPlayerSelected += PlayerSelected;
             _mainMenuManager.OnBoardRender += BoardRender;
             _mainMenuManager.OnGameStart += OnStartGame;
-            _playerManager.Initialize(PlayerMaterial);
-            _boardManager.Initialize();
         }
 
-        private void OnStartGame(bool[] board, Player player)
+        private void Start()
         {
-            _boardManager.InitializeChosenBoard(board, (int) player, PlayerMaterial);
+            _playerManager.Initialize(PlayerMaterial);
+            _boardManager.Initialize();
         }
 
         private void OnDestroy()
@@ -68,6 +67,12 @@ namespace MPHT
             OnFixedUpdate?.Invoke();
         }
 
+        #region Delegate
+        private void OnStartGame(bool[] board, Player player)
+        {
+            _boardManager.InitializeChosenBoard(board, (int)player, PlayerMaterial);
+        }
+
         private void PlayerSelected(Player player, Direction direction, ControlScheme scheme)
         {
             _playerManager.AddPlayer(player, direction, scheme);
@@ -77,5 +82,6 @@ namespace MPHT
         {
             _boardManager.RenderOutline(board, _playerMaterial);
         }
+        #endregion
     }
 }

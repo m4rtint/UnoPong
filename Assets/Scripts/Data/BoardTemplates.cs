@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 
 using System.Collections.Generic;
+
 /// <summary>
 /// Templates for how the bricks are displayed
 /// </summary>
@@ -70,5 +71,8 @@ public static class BoardTemplates
         true, false, false, false, false, false, false, false, false, false, false, true, true,
     };
 
+    /// <summary>
+    /// Array of template boards
+    /// </summary>
     public static readonly bool[][] Boards = new bool[][] { BoardOne, BoardTwo, BoardThree };
 }

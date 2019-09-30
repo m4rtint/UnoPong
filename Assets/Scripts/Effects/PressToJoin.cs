@@ -8,9 +8,9 @@ namespace MPHT
     using System.Collections;
     using System.Collections.Generic;
     using MPHT;
+    using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
-    using TMPro;
 
     /// <summary>
     /// Animation effects for keys press to enter
@@ -20,7 +20,7 @@ namespace MPHT
         [SerializeField]
         private Image _keyIcon;
         [SerializeField]
-        TextMeshProUGUI[] _pressToStart;
+        private TextMeshProUGUI[] _pressToStart;
         [SerializeField]
         private Direction _direction;
 
@@ -30,7 +30,7 @@ namespace MPHT
         public Direction Direction => _direction;
 
         /// <summary>
-        /// Keyboard key icons
+        /// Gets Keyboard key icons
         /// </summary>
         public Image KeyIcon
         {
@@ -45,9 +45,12 @@ namespace MPHT
             }
         }
 
+        /// <summary>
+        /// Sets the press to join side as disabled
+        /// </summary>
         public void SetSideAsDisabled()
         {
-            foreach(TextMeshProUGUI text in _pressToStart)
+            foreach (TextMeshProUGUI text in _pressToStart)
             {
                 text.color = Color.grey;
             }
@@ -55,9 +58,11 @@ namespace MPHT
             _keyIcon.color = Color.grey;
         }
 
+        /// <summary>
+        /// Sets the press to join appearance as enabled
+        /// </summary>
         public void SetSideAsEnabled()
-        {
-
+        { 
         }
 
         private void Awake()

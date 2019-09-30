@@ -71,9 +71,13 @@ namespace MPHT
         public event Action<Player, Direction, ControlScheme> OnPlayerSelected;
 
         /// <summary>
-        /// Render boad outline
+        /// Render board outline
         /// </summary>
         public event Action<bool[]> OnBoardRender;
+
+        /// <summary>
+        /// Logic for when game starts
+        /// </summary>
         public event Action<bool[], Player> OnGameStart;
 
         private PressToJoin[] PressToJoinSides

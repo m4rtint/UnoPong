@@ -14,9 +14,9 @@ namespace MPHT
     /// </summary>
     public class PlatformControlsBehaviour
     {
-        private const float clampedPosition = 3.0f;
-        private const float verticalAngle = 90f;
-        private const float bentPlatformRotation = 20f;
+        private const float _ClampedPosition = 3.0f;
+        private const float _VerticalAngle = 90f;
+        private const float _BentPlatformRotation = 20f;
 
         /// <summary>
         /// Gets the amount the player can move
@@ -61,10 +61,10 @@ namespace MPHT
         }
 
         /// <summary>
-        /// On Press veritcal or horizontal buttons, platform rotates by 20 degrees
+        /// On Press vertical or horizontal buttons, platform rotates by 20 degrees
         /// </summary>
         /// <param name="playerPlat">platform to rotate</param>
-        /// <returns></returns>
+        /// <returns>Quaternion angle</returns>
         public Quaternion PlayerRotation(PlayerPlatform playerPlat)
         {
             float input = 0;
@@ -78,30 +78,35 @@ namespace MPHT
                 input = InputManager.Instance.OnHorizontalPressed(playerPlat.Input);
             }
 
-            float angle = isVertical ? verticalAngle : 0;
+            float angle = isVertical ? _VerticalAngle : 0;
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
             if (input > 0)
             {
-                rotation = Quaternion.Euler(0, 0, angle + bentPlatformRotation);
+                rotation = Quaternion.Euler(0, 0, angle + _BentPlatformRotation);
             }
             else if (input < 0)
             {
-                rotation = Quaternion.Euler(0, 0, angle - bentPlatformRotation);
+                rotation = Quaternion.Euler(0, 0, angle - _BentPlatformRotation);
             }
 
             return rotation;
         }
 
-
+        /// <summary>
+        /// Clamps position of platform between the given values
+        /// </summary>
+        /// <param name="playerPlat">Current player platform</param>
+        /// <param name="position">current position of platform</param>
+        /// <returns>position to be</returns>
         public Vector3 ClampedPosition(PlayerPlatform playerPlat, Vector3 position)
         {
             if (IsVerticalMovement(playerPlat))
             {
-                return new Vector3(position.x, Mathf.Clamp(position.y, -clampedPosition, clampedPosition));
+                return new Vector3(position.x, Mathf.Clamp(position.y, -_ClampedPosition, _ClampedPosition));
             }
             else
             {
-                return new Vector3(Mathf.Clamp(position.x, -clampedPosition, clampedPosition), position.y);
+                return new Vector3(Mathf.Clamp(position.x, -_ClampedPosition, _ClampedPosition), position.y);
             }
         }
 

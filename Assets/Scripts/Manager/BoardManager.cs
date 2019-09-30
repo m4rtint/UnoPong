@@ -61,7 +61,7 @@ namespace MPHT
 
         private void TurnOffAllBricks()
         {
-            foreach(GameObject brick in _boardOfBricks)
+            foreach (GameObject brick in _boardOfBricks)
             {
                 brick.SetActive(false);
             }
@@ -99,9 +99,8 @@ namespace MPHT
         {
             _boardOfBricks[index].transform.localScale = Vector3.zero;
             _boardOfBricks[index].LeanScale(Vector3.one, 0.1f)
-                .setDelay(0.1f * Mathf.Floor(index/_WidthAndHeightOfGrid))
+                .setDelay(0.1f * Mathf.Floor(index / _WidthAndHeightOfGrid))
                 .setEaseOutCirc();
-            
         }
 
         private Material GetRandomMaterial(int players, PlayerMaterials mat)

@@ -22,7 +22,7 @@ namespace MPHT
         private bool _allowMovement = false;
 
         /// <summary>
-        /// Gets or sets Allow or disallow movement for the platform
+        /// Gets or sets a value indicating whether Allow or disallow movement for the platform
         /// </summary>
         public bool AllowMovement
         {
