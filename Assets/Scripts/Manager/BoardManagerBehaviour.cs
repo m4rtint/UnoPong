@@ -59,8 +59,26 @@ namespace MPHT
         /// <returns>array of the outlined bricks</returns>
         public bool[] OutlinedBricks(bool[] boardTemplate, int width)
         {
-            // TODO
-            return boardTemplate;
+            int numBricks = width * width;
+            bool[] outlinedBricks = new bool[numBricks];
+            // Go through array of board template
+            // If the bricks are at the edge of the board, they are automatically an outline square
+            // Check the values of the squares directly above, to the right, below, to the left of the square
+            // If any of them is false, that square is an outline square
+            for (int i = 0; i < numBricks; i++)
+            {
+                if (boardTemplate[i] &&
+                    (i - width <= 0 || i  % width == 0 || i % width == width - 1 || i + width >= numBricks ||
+                    (i - width > 0 && !boardTemplate[i - width]) ||
+                    (i - 1 > 0 && !boardTemplate[i - 1]) ||
+                    (i + 1 < numBricks && !boardTemplate[i + 1]) ||
+                    (i + width < numBricks && !boardTemplate[i + width])))
+                {
+                    outlinedBricks[i] = true;
+                }
+            }
+            return outlinedBricks;
         }
+
     }
 }
