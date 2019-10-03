@@ -149,7 +149,7 @@ namespace Tests
             _behaviour = new MainMenuManagerBehaviour(manager);
 
             KeyCode w = KeyCode.W;
-            Player expectedPlayer = Player.PLAYER_TWO;
+            Player expectedPlayer = Player.PLAYER_ONE;
 
             //Act
             _behaviour.PlayerOneSelection();
@@ -157,7 +157,7 @@ namespace Tests
             //Assert
             manager.Received().GetDirectionFromKeyCode(w);
             manager.Received().GetSchemeFromKeyCode(w);
-            Assert.AreEqual(expectedPlayer, _behaviour.CurrentPlayer);
+            Assert.AreEqual(expectedPlayer, _behaviour.CurrentAmountOfPlayersJoin);
         }
 
         [Test]
@@ -178,11 +178,11 @@ namespace Tests
             //Assert
             manager.DidNotReceive().GetDirectionFromKeyCode(f);
             manager.DidNotReceive().GetSchemeFromKeyCode(f);
-            Assert.AreEqual(expectedPlayer, _behaviour.CurrentPlayer);
+            Assert.AreEqual(expectedPlayer, _behaviour.CurrentAmountOfPlayersJoin);
         }
 
         [Test]
-        public void PlayerTwoSelection_With_Key_Pressed_Where_Control_Scheme_Not_Taken_CurrentPlayer_3()
+        public void PlayerTwoSelection_With_Key_Pressed_Where_Control_Scheme_Not_Taken_CurrentPlayer_2()
         {   
             //Arrange
             IInputManager manager = Substitute.For<IInputManager>();
@@ -192,14 +192,15 @@ namespace Tests
 
             //Act
             _behaviour.PlayerOneSelection();
+            _behaviour.SetOfTakenControlSchemes = new HashSet<ControlScheme>() { ControlScheme.KEYS };
             _behaviour.PlayerTwoSelection();
 
             //Assert
-            Assert.AreEqual(Player.PLAYER_THREE, _behaviour.CurrentPlayer);
+            Assert.AreEqual(Player.PLAYER_TWO, _behaviour.CurrentAmountOfPlayersJoin);
         }
 
         [Test]
-        public void PlayerTwoSelection_With_Key_Pressed_Where_Control_Scheme_Taken_CurrentPlayer_2()
+        public void PlayerTwoSelection_With_Key_Pressed_Where_Control_Scheme_Taken_CurrentPlayer_1()
         {
             //Arrange
             IInputManager manager = Substitute.For<IInputManager>();
@@ -213,7 +214,7 @@ namespace Tests
             _behaviour.PlayerTwoSelection();
 
             //Assert
-            Assert.AreEqual(Player.PLAYER_TWO, _behaviour.CurrentPlayer);
+            Assert.AreEqual(Player.PLAYER_ONE, _behaviour.CurrentAmountOfPlayersJoin);
         }
 
         [Test]
@@ -239,27 +240,58 @@ namespace Tests
         }
 
         [Test]
-        public void PlayerThreeSelection_With_Key_Pressed_Where_Control_Scheme_Taken_CurrentPlayer_3()
+        public void PlayerThreeSelection_With_Key_Pressed_Where_Control_Scheme_Taken_CurrentPlayer_2()
         {
-            Assert.AreEqual(true, false);
+            //Arrange
+            IInputManager manager = Substitute.For<IInputManager>();
+            KeyCode keyPressed = KeyCode.A;
+            // Player One Selection
+            manager.IsAnyKeyBeingPressed().Returns(KeyCode.W);
+            //Player Two Selection
+            manager.IsKeyBeingPressedAt(default).ReturnsForAnyArgs(KeyCode.DownArrow);
+            manager.GetSchemeFromKeyCode(KeyCode.DownArrow).ReturnsForAnyArgs(ControlScheme.KEYS);
+            // Player three selection
+            manager.IsKeyBeingPressOnAxis(default).ReturnsForAnyArgs(keyPressed);
+            manager.GetSchemeFromKeyCode(keyPressed).Returns(ControlScheme.WASD);
+
+            _behaviour = new MainMenuManagerBehaviour(manager);
+
+            //Act
+            _behaviour.PlayerOneSelection();
+            _behaviour.SetOfTakenControlSchemes.Add(ControlScheme.WASD);
+            _behaviour.PlayerTwoSelection();
+            _behaviour.SetOfTakenControlSchemes.Add(ControlScheme.KEYS);
+            _behaviour.PlayerThreeSelection();  
+
+            //Assert
+            Assert.AreEqual(Player.PLAYER_TWO, _behaviour.CurrentAmountOfPlayersJoin);
         }
 
         [Test]
-        public void PlayerThreeSelection_With_Key_Pressed_Where_Control_Scheme_Not_Taken_CurrentPlayer_4()
+        public void PlayerThreeSelection_With_Key_Pressed_Where_Control_Scheme_Not_Taken_CurrentPlayer_3()
         {
-            Assert.AreEqual(true, false);
-        }
+            //Arrange
+            IInputManager manager = Substitute.For<IInputManager>();
+            KeyCode keyPressed = KeyCode.G;
+            // Player One Selection
+            manager.IsAnyKeyBeingPressed().Returns(KeyCode.W);
+            //Player Two Selection
+            manager.IsKeyBeingPressedAt(default).ReturnsForAnyArgs(KeyCode.DownArrow);
+            manager.GetSchemeFromKeyCode(KeyCode.DownArrow).ReturnsForAnyArgs(ControlScheme.KEYS);
+            // Player three selection
+            manager.IsKeyBeingPressOnAxis(default).ReturnsForAnyArgs(keyPressed);
+            manager.GetSchemeFromKeyCode(keyPressed).Returns(ControlScheme.YGHJ);
+            _behaviour = new MainMenuManagerBehaviour(manager);
 
-        [Test]
-        public void PlayerFourSelection_With_Key_Pressed_Where_Control_Scheme_Taken_CurrentPlayer_3()
-        {
-            Assert.AreEqual(true, false);
-        }
+            //Act
+            _behaviour.PlayerOneSelection();
+            _behaviour.SetOfTakenControlSchemes.Add(ControlScheme.WASD);
+            _behaviour.PlayerTwoSelection();
+            _behaviour.SetOfTakenControlSchemes.Add(ControlScheme.KEYS);
+            _behaviour.PlayerThreeSelection();
 
-        [Test]
-        public void PlayerFourSelection_With_Key_Pressed_Where_Control_Scheme_Not_Taken_CurrentPlayer_4()
-        {
-            Assert.AreEqual(true, false);
+            //Assert
+            Assert.AreEqual(Player.PLAYER_THREE, _behaviour.CurrentAmountOfPlayersJoin);
         }
 
         [Test]
@@ -274,27 +306,128 @@ namespace Tests
         }
 
         [Test]
-        public void CycleThroughBoards_With_Board_One_To_The_Right_Equal_Index()
+        public void PlayerFourSelection_With_Key_Pressed_Where_Control_Scheme_Taken_CurrentPlayer_3()
         {
-            // 1 -> 2
+            //Arrange
+            IInputManager manager = Substitute.For<IInputManager>();
+            // Player One Selection - WASD - UP
+            manager.IsAnyKeyBeingPressed().Returns(KeyCode.W);
+            //Player Two Selection - KEYS - Down
+            manager.IsKeyBeingPressedAt(default).ReturnsForAnyArgs(KeyCode.DownArrow);
+            manager.GetSchemeFromKeyCode(KeyCode.DownArrow).Returns(ControlScheme.KEYS);
+            // Player three selection - YGHJ - Left
+            manager.IsKeyBeingPressOnAxis(default).ReturnsForAnyArgs(KeyCode.G);
+            manager.GetSchemeFromKeyCode(KeyCode.G).Returns(ControlScheme.YGHJ);
+            //Player Four Selection - YGHJ - Right
+            manager.IsKeyBeingPressedAt(default).Returns(KeyCode.J);
+            manager.GetSchemeFromKeyCode(KeyCode.J).Returns(ControlScheme.YGHJ);
+
+            _behaviour = new MainMenuManagerBehaviour(manager);
+
+            //Act
+            _behaviour.PlayerOneSelection();
+            _behaviour.SetOfTakenControlSchemes.Add(ControlScheme.WASD);
+            _behaviour.PlayerTwoSelection();
+            _behaviour.SetOfTakenControlSchemes.Add(ControlScheme.KEYS);
+            _behaviour.PlayerThreeSelection();
+            _behaviour.SetOfTakenControlSchemes.Add(ControlScheme.YGHJ);
+            _behaviour.PlayerFourSelection();
+
+            //Assert
+            Assert.AreEqual(Player.PLAYER_THREE, _behaviour.CurrentAmountOfPlayersJoin);
+        }
+
+        [Test]
+        public void PlayerFourSelection_With_Key_Pressed_Where_Control_Scheme_Not_Taken_CurrentPlayer_4()
+        {
+            //Arrange
+            IInputManager manager = Substitute.For<IInputManager>();
+            // Player One Selection - WASD - UP
+            manager.IsAnyKeyBeingPressed().Returns(KeyCode.W);
+            //Player Two Selection - KEYS - Down
+            manager.IsKeyBeingPressedAt(Direction.DOWN).Returns(KeyCode.DownArrow);
+            manager.GetSchemeFromKeyCode(KeyCode.DownArrow).Returns(ControlScheme.KEYS);
+            // Player three selection - YGHJ - Left
+            manager.IsKeyBeingPressOnAxis(default).ReturnsForAnyArgs(KeyCode.G);
+            manager.GetSchemeFromKeyCode(KeyCode.G).Returns(ControlScheme.YGHJ);
+            //Player Four Selection - YGHJ - Right
+            manager.IsKeyBeingPressedAt(Direction.RIGHT).Returns(KeyCode.Quote);
+            manager.GetSchemeFromKeyCode(KeyCode.Quote).Returns(ControlScheme.PL);
+
+            _behaviour = new MainMenuManagerBehaviour(manager);
+            _behaviour.ListOfOpenDirections = new List<Direction>() { Direction.RIGHT };
+            _behaviour.FirstChosenDirection = Direction.UP;
+
+            //Act
+            _behaviour.PlayerOneSelection();
+            _behaviour.SetOfTakenControlSchemes.Add(ControlScheme.WASD);
+            _behaviour.PlayerTwoSelection();
+            _behaviour.SetOfTakenControlSchemes.Add(ControlScheme.KEYS);
+            _behaviour.PlayerThreeSelection();
+            _behaviour.SetOfTakenControlSchemes.Add(ControlScheme.YGHJ);
+            _behaviour.PlayerFourSelection();
+
+            //Assert
+            Assert.AreEqual(Player.PLAYER_FOUR, _behaviour.CurrentAmountOfPlayersJoin);
+        }
+
+        [Test]
+        public void CycleThroughBoards_With_Board_One_To_The_Right_Equal_Index()
+        {   //1 -> 2
+            //Arrange
+            int expectedIndex = 1;
+            _behaviour.CurrentBoardSelection = 0;
+
+            //Act
+            _behaviour.CycleThroughBoards(false);
+
+            //Assert
+            Assert.AreEqual(_behaviour.CurrentBoardSelection, expectedIndex);
         }
 
         [Test]
         public void CycleThroughBoards_With_Board_One_To_The_Left_Equal_Index()
         {
-            // 1 -> 3
+            //1 -> 3
+            //Arrange
+            int expectedIndex = 2;
+            _behaviour.CurrentBoardSelection = 0;
+
+            //Act
+            _behaviour.CycleThroughBoards(true);
+
+            //Assert
+            Assert.AreEqual(expectedIndex, _behaviour.CurrentBoardSelection);
         }
 
         [Test]
         public void CycleThroughBoards_With_Board_Three_To_The_Left_Equal_Index()
         {
             // 3 -> 2
+            //Arrange
+            int expectedIndex = 1;
+            _behaviour.CurrentBoardSelection = 2;
+
+            //Act
+            _behaviour.CycleThroughBoards(true);
+
+            //Assert
+            Assert.AreEqual(_behaviour.CurrentBoardSelection, expectedIndex);
         }
 
         [Test]
         public void CycleThroughBoards_With_Board_Three_To_The_Right_Equal_Index()
         {
             //3 -> 1
+            //Arrange
+            int expectedIndex = 0;
+            _behaviour.CurrentBoardSelection = 2;
+
+            //Act
+            _behaviour.CycleThroughBoards(false);
+
+            //Assert
+            Assert.AreEqual(_behaviour.CurrentBoardSelection, expectedIndex);
         }
 
     }

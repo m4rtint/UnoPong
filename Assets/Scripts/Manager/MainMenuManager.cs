@@ -157,7 +157,7 @@ namespace MPHT
             _startButton.onClick.AddListener(() =>
             {
                 _startButton.gameObject.SetActive(false);
-                OnGameStart(BoardTemplates.Boards[_behaviour.CurrentBoardSelection], _behaviour.CurrentPlayer); 
+                OnGameStart(BoardTemplates.Boards[_behaviour.CurrentBoardSelection], _behaviour.CurrentAmountOfPlayersJoin); 
             });
         }
 

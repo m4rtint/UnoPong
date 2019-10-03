@@ -21,7 +21,7 @@ namespace MPHT
         private Direction _firstChosenDirection;
 
         // Data to pass back
-        private Player _currentPlayer = Player.PLAYER_ONE;
+        private Player _playersJoined = Player.PLAYER_ONE;
         private int _currentBoardSelection = 0;
 
         /// <summary>
@@ -57,12 +57,25 @@ namespace MPHT
         /// <summary>
         /// The Current Player choosing the platform
         /// </summary>
-        public Player CurrentPlayer => _currentPlayer;
+        public Player CurrentAmountOfPlayersJoin => _playersJoined;
 
         /// <summary>
         /// Current Board Selection
         /// </summary>
-        public int CurrentBoardSelection => _currentBoardSelection;
+        public int CurrentBoardSelection { get => _currentBoardSelection; set => _currentBoardSelection = value; }
+
+        public Direction FirstChosenDirection
+        {
+            get
+            {
+                return _firstChosenDirection;
+            }
+
+            set
+            {
+                _firstChosenDirection = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets List of available directions
@@ -154,8 +167,7 @@ namespace MPHT
             {
                 Direction chosenDirection = _inputManager.GetDirectionFromKeyCode(key);
                 ControlScheme controls = _inputManager.GetSchemeFromKeyCode(key);
-                OnPlatformSelected?.Invoke(_currentPlayer, chosenDirection, controls);
-                _currentPlayer++;
+                OnPlatformSelected?.Invoke(_playersJoined, chosenDirection, controls);
             }
         }
         
@@ -177,8 +189,8 @@ namespace MPHT
                 ControlScheme controls = _inputManager.GetSchemeFromKeyCode(key);
                 if (!SetOfTakenControlSchemes.Contains(controls))
                 {
-                    OnPlatformSelected?.Invoke(_currentPlayer, chosenDirection, controls);
-                    _currentPlayer++;
+                    OnPlatformSelected?.Invoke(_playersJoined, chosenDirection, controls);
+                    _playersJoined++;
                 }
             }
         }
@@ -195,16 +207,16 @@ namespace MPHT
             }
 
             bool isHorizontalAvailable = ListOfOpenDirections.Contains(Direction.LEFT);
-            KeyCode key = InputManager.IsKeyBeingPressOnAxis(isHorizontalAvailable);
+            KeyCode key = _inputManager.IsKeyBeingPressOnAxis(isHorizontalAvailable);
         
             if (key != KeyCode.None)
             {
-                Direction chosenDirection = InputManager.GetDirectionFromKeyCode(key);
-                ControlScheme controls = InputManager.GetSchemeFromKeyCode(key);
+                Direction chosenDirection = _inputManager.GetDirectionFromKeyCode(key);
+                ControlScheme controls = _inputManager.GetSchemeFromKeyCode(key);
                 if (!SetOfTakenControlSchemes.Contains(controls))
                 {
-                    OnPlatformSelected?.Invoke(_currentPlayer, chosenDirection, controls);
-                    _currentPlayer++;
+                    OnPlatformSelected?.Invoke(_playersJoined, chosenDirection, controls);
+                    _playersJoined++;
                 }
             }
         }
@@ -220,14 +232,14 @@ namespace MPHT
             }
 
             Direction chosenDirection = ListOfOpenDirections[0];
-            KeyCode key = InputManager.IsKeyBeingPressedAt(chosenDirection);
+            KeyCode key = _inputManager.IsKeyBeingPressedAt(chosenDirection);
             if (key != KeyCode.None)
             {
-                ControlScheme controls = InputManager.GetSchemeFromKeyCode(key);
-                if (!_setOfTakenControlSchemes.Contains(controls))
+                ControlScheme controls = _inputManager.GetSchemeFromKeyCode(key);
+                if (!SetOfTakenControlSchemes.Contains(controls))
                 {
-                    OnPlatformSelected?.Invoke(_currentPlayer, chosenDirection, controls);
-                    _currentPlayer++;
+                    OnPlatformSelected?.Invoke(_playersJoined, chosenDirection, controls);
+                    _playersJoined++;
                 }
             }
         }
@@ -241,7 +253,13 @@ namespace MPHT
         {
             LeanTween.cancelAll();
             _currentBoardSelection += left ? -1 : 1;
-            _currentBoardSelection = (_currentBoardSelection < 0) ? BoardTemplates.Boards.Length - 1 : _currentBoardSelection;
+            if (_currentBoardSelection >= BoardTemplates.Boards.Length)
+            {
+                _currentBoardSelection = 0;
+            } else if (_currentBoardSelection < 0 )
+            {
+                _currentBoardSelection = BoardTemplates.Boards.Length - 1;
+            }
 
             return BoardTemplates.Boards[_currentBoardSelection];
         }
