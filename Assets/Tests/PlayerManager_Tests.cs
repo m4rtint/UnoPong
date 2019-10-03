@@ -181,69 +181,107 @@ namespace Tests
         }
 
         [Test]
-        public void GetPositionFromDirection_With_North_Equal_Vector()
+        public void GetPositionFromDirection_With_UP_Equal_Vector()
         {
             //Arrange
             PlayerManagerBehaviour behaviour = new PlayerManagerBehaviour(mat);
-
+            Vector3 expected = new Vector3(0, 4);
             //Act
+            Vector3 actual = behaviour.GetPositionFromDirection(Direction.UP);
 
             //Assert
-            Assert.AreEqual(true, false);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void GetPositionFromDirection_With_South_Equal_Vector()
+        public void GetPositionFromDirection_With_DOWN_Equal_Vector()
         {
-            Assert.AreEqual(true, false);
+            //Arrange
+            PlayerManagerBehaviour behaviour = new PlayerManagerBehaviour(mat);
+            Vector3 expected = new Vector3(0, -4);
+            //Act
+            Vector3 actual = behaviour.GetPositionFromDirection(Direction.DOWN);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void GetPositionFromDirection_With_East_Equal_Vector()
+        public void GetPositionFromDirection_With_RIGHT_Equal_Vector()
         {
-            Assert.AreEqual(true, false);
+            //Arrange
+            PlayerManagerBehaviour behaviour = new PlayerManagerBehaviour(mat);
+            Vector3 expected = new Vector3(4, 0);
+            //Act
+            Vector3 actual = behaviour.GetPositionFromDirection(Direction.RIGHT);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void GetPositionFromDirection_With_West_Equal_Vector()
+        public void GetPositionFromDirection_With_LEFT_Equal_Vector()
         {
-            Assert.AreEqual(true, false);
+            //Arrange
+            PlayerManagerBehaviour behaviour = new PlayerManagerBehaviour(mat);
+            Vector3 expected = new Vector3(-4, 0);
+            //Act
+            Vector3 actual = behaviour.GetPositionFromDirection(Direction.LEFT);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void GetRotationFromDirection_With_North_Equal_Quarternion()
+        public void GetRotationFromDirection_With_UP_Equal_Quarternion()
         {
-            Assert.AreEqual(true, false);
+            //Arrange
+            PlayerManagerBehaviour behaviour = new PlayerManagerBehaviour(mat);
+            Quaternion expected = Quaternion.identity;
+            //Act
+            Quaternion actual = behaviour.GetRotationFromDirection(Direction.UP);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void GetRotationFromDirection_With_East_Equal_Quarternion()
+        public void GetRotationFromDirection_With_RIGHT_Equal_Quarternion()
         {
-            Assert.AreEqual(true, false);
+            //Arrange
+            PlayerManagerBehaviour behaviour = new PlayerManagerBehaviour(mat);
+            Quaternion expected = Quaternion.Euler(0, 0, 90);
+            //Act
+            Quaternion actual = behaviour.GetRotationFromDirection(Direction.RIGHT);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void GetRotationFromDirection_With_West_Equal_Quarternion()
+        public void GetRotationFromDirection_With_LEFT_Equal_Quarternion()
         {
-            Assert.AreEqual(true, false);
+            //Arrange
+            PlayerManagerBehaviour behaviour = new PlayerManagerBehaviour(mat);
+            Quaternion expected = Quaternion.Euler(0, 0, 90);
+            //Act
+            Quaternion actual = behaviour.GetRotationFromDirection(Direction.LEFT);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void GetRotationFromDirection_With_South_Equal_Quarternion()
+        public void GetRotationFromDirection_With_DOWN_Equal_Quarternion()
         {
-            Assert.AreEqual(true, false);
-        }
+            //Arrange
+            PlayerManagerBehaviour behaviour = new PlayerManagerBehaviour(mat);
+            Quaternion expected = Quaternion.identity;
+            //Act
+            Quaternion actual = behaviour.GetRotationFromDirection(Direction.DOWN);
 
-        [Test]
-        public void CheckPlayerAvailabilityCount_With_Correct_Count_With_Exception()
-        {
-            Assert.AreEqual(true, false);
-        }
-
-        [Test]
-        public void CheckPlayerAvailabilityCount_With_Wrong_Count_No_Exception()
-        {
-            Assert.AreEqual(true, false);
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
     }
 }
