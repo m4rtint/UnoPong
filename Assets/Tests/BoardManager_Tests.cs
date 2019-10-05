@@ -32,22 +32,42 @@ namespace Tests
         [Test]
         public void CheckTemplate_Same_Size_Boards_Should_Not_Throw_Error()
         {
+            //Arrange
+            bool[] expectedBoard = CreateBoardWith(13);
+
             //Assert
-            Assert.DoesNotThrow(() => { behaviour.CheckTemplate(new bool[12], new GameObject[12]); });
+            Assert.DoesNotThrow(() => { behaviour.CheckTemplate(expectedBoard, new GameObject[13]); });
         }
 
         [Test]
-        public void CheckTemplate_Same_Size_Boards_And_Divisible_By_12_Should_Not_Throw_Error()
+        public void CheckTemplate_Same_Size_Boards_And_Divisible_By_13_Should_Not_Throw_Error()
         {
+            //Arrange
+            bool[] expectedBoard = CreateBoardWith(169);
+
             //Assert
-            Assert.DoesNotThrow(() => { behaviour.CheckTemplate(new bool[144], new GameObject[144]); });
+            Assert.DoesNotThrow(() => { behaviour.CheckTemplate(expectedBoard, new GameObject[169]); });
         }
 
         [Test]
-        public void CheckTemplate_Same_Size_Boards_But_Not_Divisible_By_12()
+        public void CheckTemplate_Same_Size_Boards_But_Not_Divisible_By_13_Throw_error()
         {
+            //Arrange
+            bool[] expectedBoard = CreateBoardWith(15);
+
             //Assert
-            Assert.Catch<Exception>(() => { behaviour.CheckTemplate(new bool[15], new GameObject[15]); });
+            Assert.Catch<Exception>(() => { behaviour.CheckTemplate(expectedBoard, new GameObject[15]); });
+        }
+
+        private bool[] CreateBoardWith(int activated)
+        {
+            bool[] tempBoard = new bool[activated];
+            for (int i = 0; i < activated; i++)
+            {
+                tempBoard[i] = true;
+            }
+
+            return tempBoard;
         }
 
         [Test]

@@ -30,9 +30,10 @@ namespace MPHT
                 }
             }
 
-            if (numberOfBricks % 12 != 0 || numberOfBricks == 0)
+            int remainder = numberOfBricks % 13;
+            if (remainder != 0 || numberOfBricks == 0)
             {
-                throw new System.Exception($"Board template amount not divisible by 12: board has {numberOfBricks % 12} too much, or {12 - numberOfBricks % 12} too little");
+                throw new System.Exception($"Board template amount not divisible by 13: board has {remainder} too much, or {13 - remainder} too little");
             }
 
             if (boardTemplate.Length != board.Length)
