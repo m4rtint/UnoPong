@@ -18,9 +18,8 @@ namespace MPHT
         /// Initializes a new instance of the <see cref="LivesManager" /> class.
         /// </summary>
         /// <param name="dictOfLives">Dictionary of lives</param>
-        public LivesManager(Dictionary<Player, int> dictOfLives)
+        public LivesManager(int amountOfBricks, int amountOfPlayers) 
         {
-            _dictionaryOfPlayerLives = dictOfLives;
         }
     }
 }

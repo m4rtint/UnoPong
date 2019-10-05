@@ -25,6 +25,7 @@ namespace MPHT
         [SerializeField]
         private MainMenuManager _mainMenuManager;
         private PlayerMaterials _playerMaterial;
+        private LivesManager _livesManager;
         
         /// <summary>
         /// Called on every fixed update. All classes should be based on this
@@ -71,6 +72,7 @@ namespace MPHT
         private void OnStartGame(bool[] board, Player player)
         {
             _boardManager.InitializeChosenBoard(board, (int)player, PlayerMaterial);
+            _livesManager = new LivesManager()
         }
 
         private void PlayerSelected(Player player, Direction direction, ControlScheme scheme)
