@@ -168,7 +168,6 @@ namespace Tests
             KeyCode f = KeyCode.None;
             manager.IsAnyKeyBeingPressed().Returns(f);
             _behaviour = new MainMenuManagerBehaviour(manager);
-
             
             Player expectedPlayer = Player.PLAYER_ONE;
 
