@@ -189,8 +189,8 @@ namespace MPHT
                 ControlScheme controls = _inputManager.GetSchemeFromKeyCode(key);
                 if (!SetOfTakenControlSchemes.Contains(controls))
                 {
-                    OnPlatformSelected?.Invoke(_playersJoined, chosenDirection, controls);
                     _playersJoined++;
+                    OnPlatformSelected?.Invoke(_playersJoined, chosenDirection, controls);
                 }
             }
         }
@@ -215,8 +215,8 @@ namespace MPHT
                 ControlScheme controls = _inputManager.GetSchemeFromKeyCode(key);
                 if (!SetOfTakenControlSchemes.Contains(controls))
                 {
-                    OnPlatformSelected?.Invoke(_playersJoined, chosenDirection, controls);
                     _playersJoined++;
+                    OnPlatformSelected?.Invoke(_playersJoined, chosenDirection, controls);
                 }
             }
         }
@@ -238,8 +238,8 @@ namespace MPHT
                 ControlScheme controls = _inputManager.GetSchemeFromKeyCode(key);
                 if (!SetOfTakenControlSchemes.Contains(controls))
                 {
-                    OnPlatformSelected?.Invoke(_playersJoined, chosenDirection, controls);
                     _playersJoined++;
+                    OnPlatformSelected?.Invoke(_playersJoined, chosenDirection, controls);
                 }
             }
         }

@@ -33,7 +33,21 @@ namespace Tests
         public void CheckTemplate_Same_Size_Boards_Should_Not_Throw_Error()
         {
             //Assert
-            Assert.DoesNotThrow(() => { behaviour.CheckTemplate(new bool[1], new GameObject[1]); });
+            Assert.DoesNotThrow(() => { behaviour.CheckTemplate(new bool[12], new GameObject[12]); });
+        }
+
+        [Test]
+        public void CheckTemplate_Same_Size_Boards_And_Divisible_By_12_Should_Not_Throw_Error()
+        {
+            //Assert
+            Assert.DoesNotThrow(() => { behaviour.CheckTemplate(new bool[144], new GameObject[144]); });
+        }
+
+        [Test]
+        public void CheckTemplate_Same_Size_Boards_But_Not_Divisible_By_12()
+        {
+            //Assert
+            Assert.Catch<Exception>(() => { behaviour.CheckTemplate(new bool[15], new GameObject[15]); });
         }
 
         [Test]

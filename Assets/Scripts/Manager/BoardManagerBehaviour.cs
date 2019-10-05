@@ -21,6 +21,20 @@ namespace MPHT
         /// <param name="board">board on the scene</param>
         public void CheckTemplate(bool[] boardTemplate, GameObject[] board)
         {
+            int numberOfBricks = 0;
+            foreach(bool b in boardTemplate)
+            {
+                if (b)
+                {
+                    numberOfBricks++;
+                }
+            }
+
+            if (numberOfBricks % 12 != 0 || numberOfBricks == 0)
+            {
+                throw new System.Exception($"Board template amount not divisible by 12: board has {numberOfBricks % 12} too much, or {12 - numberOfBricks % 12} too little");
+            }
+
             if (boardTemplate.Length != board.Length)
             {
                 throw new System.Exception($"Board template amount not exact: board has {board.Length} bricks, template has {boardTemplate.Length} bricks");
